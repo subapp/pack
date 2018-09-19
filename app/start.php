@@ -13,7 +13,7 @@ include_once __DIR__ . '/../vendor/autoload.php';
 $version = new Version(137812);
 $schema = new Schema($version);
 
-$schema->addValue(new IntegerValue('created', 'created_at', 16));
+$schema->addValue(new IntegerValue('created', 'created_at', IntegerValue::INT16));
 $schema->addValue(new StringValue('description', 'hotel_description', 255));
 $schema->addValue(new StringValue('name', 'hotel_name', 32));
 
