@@ -1,0 +1,24 @@
+{
+  "name": "subapp/pack",
+  "description": "Subapp Data Pack",
+  "keywords": [
+    "php data pack", "data pack"
+  ],
+  "authors": [
+    {
+      "name": "Ivan Hontarenko"
+    }
+  ],
+  "license": "MIT",
+  "type": "library",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Subapp\\Pack\\": "src/"
+    }
+  }
+}
