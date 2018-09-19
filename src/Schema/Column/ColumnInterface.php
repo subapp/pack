@@ -1,12 +1,12 @@
 <?php
 
-namespace Subapp\Pack\Schema\Value;
+namespace Subapp\Pack\Schema\Column;
 
 /**
- * Interface DefinitionInterface
+ * Interface ColumnInterface
  * @package Subapp\Pack\Schema\Definition
  */
-interface ValueInterface
+interface ColumnInterface
 {
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace Subapp\Pack\Schema\Value;
+namespace Subapp\Pack\Schema\Column;
 
 /**
  * Class AbstractValueLength
- * @package Subapp\Pack\Schema\Value
+ * @package Subapp\Pack\Schema\Column
  */
-abstract class AbstractValueLength extends AbstractValue implements ValueLengthInterface
+abstract class AbstractColumnLength extends AbstractColumn implements ColumnLengthInterface
 {
 
     /**

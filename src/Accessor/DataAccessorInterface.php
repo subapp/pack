@@ -15,4 +15,10 @@ interface DataAccessorInterface
      */
     public function getValue($keyName);
 
+    /**
+     * @param string $keyName
+     * @param string|integer $value
+     */
+    public function setValue($keyName, $value);
+
 }

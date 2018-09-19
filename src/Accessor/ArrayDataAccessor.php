@@ -31,4 +31,12 @@ class ArrayDataAccessor implements DataAccessorInterface
         return $this->data[$keyName] ?? null;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function setValue($keyName, $value)
+    {
+        $this->data[$keyName] = $value;
+    }
+
 }

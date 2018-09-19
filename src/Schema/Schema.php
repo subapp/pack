@@ -2,7 +2,7 @@
 
 namespace Subapp\Pack\Schema;
 
-use Subapp\Pack\Schema\Value\ValueInterface;
+use Subapp\Pack\Schema\Column\ColumnInterface;
 
 /**
  * Class Schema
@@ -33,7 +33,7 @@ class Schema implements SchemaInterface
     /**
      * @inheritDoc
      */
-    public function addValue(ValueInterface $value)
+    public function addValue(ColumnInterface $value)
     {
         $this->collection[$value->getName()] = $value;
     }

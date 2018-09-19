@@ -2,7 +2,7 @@
 
 namespace Subapp\Pack\Schema;
 
-use Subapp\Pack\Schema\Value\ValueInterface;
+use Subapp\Pack\Schema\Column\ColumnInterface;
 
 /**
  * Interface SchemaInterface
@@ -12,19 +12,19 @@ interface SchemaInterface
 {
 
     /**
-     * @param ValueInterface $value
+     * @param ColumnInterface $value
      * @return void
      */
-    public function addValue(ValueInterface $value);
+    public function addValue(ColumnInterface $value);
 
     /**
-     * @return ValueInterface[]
+     * @return ColumnInterface[]
      */
     public function getValues();
 
     /**
      * @param string $name
-     * @return ValueInterface
+     * @return ColumnInterface
      */
     public function getValue($name);
 
