@@ -9,24 +9,31 @@ namespace Subapp\Pack\Schema\Column;
 class BitMaskColumn extends IntegerColumn
 {
 
-    private $values;
+    /**
+     * @var BooleanColumn[]
+     */
+    private $columns;
 
     /**
      * @inheritDoc
      */
-    public function __construct($name, BooleanColumn ...$values)
+    public function __construct($name, $position, BooleanColumn ...$values)
     {
-        parent::__construct($name, null, IntegerColumn::INT32);
+        parent::__construct($name, null, $position, IntegerColumn::INT32);
 
-        $this->values = $values;
+        $this->columns = $values;
     }
 
     /**
-     * @return mixed
+     * @return array|BooleanColumn[]
      */
-    public function getValues()
+    public function getColumns()
     {
-        return $this->values;
+        uasort($this->columns, function (ColumnInterface $columnA, ColumnInterface $columnB) {
+            return $columnA->getPosition() - $columnB->getPosition();
+        });
+
+        return $this->columns;
     }
 
 }

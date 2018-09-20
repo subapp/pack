@@ -19,4 +19,9 @@ interface ColumnInterface
      */
     public function getColumnName();
 
+    /**
+     * @return integer
+     */
+    public function getPosition();
+
 }

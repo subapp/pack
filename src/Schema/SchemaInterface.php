@@ -15,24 +15,24 @@ interface SchemaInterface
      * @param ColumnInterface $value
      * @return void
      */
-    public function addValue(ColumnInterface $value);
+    public function addColumn(ColumnInterface $value);
 
     /**
-     * @return ColumnInterface[]
+     * @return ColumnInterface[]|\ArrayIterator
      */
-    public function getValues();
+    public function getColumns();
 
     /**
      * @param string $name
      * @return ColumnInterface
      */
-    public function getValue($name);
+    public function getColumn($name);
 
     /**
      * @param string $name
      * @return boolean
      */
-    public function hasValue($name);
+    public function hasColumn($name);
 
     /**
      * @return Version

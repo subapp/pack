@@ -18,11 +18,12 @@ abstract class AbstractColumnLength extends AbstractColumn implements ColumnLeng
      * AbstractValueLength constructor.
      * @param string $name
      * @param string $column
+     * @param integer $position
      * @param integer $length
      */
-    public function __construct($name, $column, $length)
+    public function __construct($name, $column, $position, $length)
     {
-        parent::__construct($name, $column);
+        parent::__construct($name, $column, $position);
 
         $this->length = $length;
     }

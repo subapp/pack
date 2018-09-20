@@ -17,7 +17,7 @@ class Schema implements SchemaInterface
     private $version;
 
     /**
-     * @var array
+     * @var \ArrayIterator
      */
     private $collection = [];
 
@@ -27,39 +27,44 @@ class Schema implements SchemaInterface
      */
     public function __construct(Version $version)
     {
+        $this->collection = new \ArrayIterator();
         $this->version = $version;
     }
 
     /**
      * @inheritDoc
      */
-    public function addValue(ColumnInterface $value)
+    public function addColumn(ColumnInterface $value)
     {
-        $this->collection[$value->getName()] = $value;
+        $this->collection->offsetSet($value->getName(), $value);
     }
 
     /**
      * @inheritDoc
      */
-    public function getValues()
+    public function getColumns()
     {
+        $this->collection->uasort(function (ColumnInterface $columnA, ColumnInterface $columnB) {
+            return $columnA->getPosition() - $columnB->getPosition();
+        });
+
         return $this->collection;
     }
 
     /**
      * @inheritDoc
      */
-    public function getValue($name)
+    public function getColumn($name)
     {
-        return $this->collection[$name] ?? null;
+        return $this->collection->offsetGet($name);
     }
 
     /**
      * @inheritDoc
      */
-    public function hasValue($name)
+    public function hasColumn($name)
     {
-        return isset($this->collection[$name]);
+        return $this->collection->offsetExists($name);
     }
 
     /**

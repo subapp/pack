@@ -20,13 +20,20 @@ abstract class AbstractColumn implements ColumnInterface
     protected $column;
 
     /**
+     * @var int
+     */
+    protected $position = 0;
+
+    /**
      * AbstractValue constructor.
      * @param string $name
      * @param string $column
+     * @param integer $position
      */
-    public function __construct($name, $column)
+    public function __construct($name, $column, $position)
     {
         $this->name = $name;
+        $this->position = $position;
         $this->column = $column;
     }
 
@@ -44,6 +51,14 @@ abstract class AbstractColumn implements ColumnInterface
     public function getColumnName()
     {
         return $this->column;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 
 }
