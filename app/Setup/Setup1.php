@@ -6,6 +6,7 @@ use Subapp\Pack\Common\Setup\AbstractSetup;
 use Subapp\Pack\Compressor\GzCompressor;
 use Subapp\Pack\Facade;
 use Subapp\Pack\Optimizer\Optimizer;
+use Subapp\Pack\Serializer\MsgPackSerializer;
 use Subapp\Pack\Serializer\PhpSerializer;
 
 /**
@@ -21,8 +22,10 @@ class Setup1 extends AbstractSetup
     public function setup(Facade $facade)
     {
         $facade->setOptimizer(new Optimizer($this->getConfiguration()));
-        $facade->setCompressor(new GzCompressor());
-        $facade->addSerializer(new PhpSerializer());
+//        $facade->setCompressor(new GzCompressor());
+//        $facade->addSerializer(new PhpSerializer());
+//        $facade->addSerializer(new MsgPackSerializer());
+        
     }
     
     /**

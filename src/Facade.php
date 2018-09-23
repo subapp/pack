@@ -137,9 +137,7 @@ class Facade
         if ($this->isOptimizerInitialized()) {
             $processed = $this->optimizer->pack($processed);
         }
-        
-        var_dump($processed);
-    
+
         foreach ($this->serializers as $serializer) {
             $processed = $serializer->serialize($processed);
         }
