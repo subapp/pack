@@ -38,12 +38,12 @@ class BitMaskKeeperValueTransformer extends AbstractColumnsKeeperValueTransforme
      */
     protected function getInnerValues(ColumnInterface $column, AccessorInterface $input)
     {
-        $index = 0; $values = [];
+        $values = [];
         /** @var ColumnsKeeperInterface|ColumnInterface $column */
         $mask = $input->getValue($column->getName());
     
-        foreach ($column->getColumns() as $inner) {
-            $values[$index] = (boolean)($mask & (1 << $index++));
+        for ($index = 0, $length = count($column->getColumns()); $index < $length; $index++) {
+            $values[$index] = (boolean)($mask & (1 << $index));
         }
         
         return $values;

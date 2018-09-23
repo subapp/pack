@@ -1,11 +1,4 @@
 <?php
-/**
- * This file is part of ColibriLabs package
- *
- * (c) 2016-2018 Ivan Hontarenko
- *
- * For view all licence information open LICENCE file
- */
 
 namespace Subapp\Pack\Optimizer\Schema\Type;
 

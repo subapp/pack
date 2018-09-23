@@ -22,7 +22,7 @@ class TypeMapping implements TypeMappingInterface
         Type::TINYINT => 'C',
         Type::BOOLEAN => 'c',
         Type::CHAR => 'C',
-        Type::DOUBLE => 'f',
+        Type::DOUBLE => 'd',
         Type::FLOAT => 'f',
         Type::STRING => 'a',
         Type::DATETIME => 'a',

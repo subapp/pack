@@ -1,12 +1,12 @@
 <?php
 
-namespace Subapp\Pack\Runtime\Config;
+namespace Subapp\Pack\Common\Config;
 
 use Subapp\Collection\Parameters\ParametersInterface;
 
 /**
  * Interface ConfigParametersInterface
- * @package Subapp\Pack\Runtime\Config
+ * @package Subapp\Pack\Common\Config
  */
 interface ConfigParametersInterface extends ParametersInterface
 {

@@ -24,4 +24,9 @@ class BigCacheData
     public $boolean8 = true;
     public $boolean9 = true;
     
+    public $float1 = 0.00;
+    public $float2 = 0.00;
+    public $double1 = 0.00;
+    public $double2 = 0.00;
+    
 }

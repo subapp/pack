@@ -1,10 +1,10 @@
 <?php
 
-namespace Subapp\Pack\Runtime;
+namespace Subapp\Pack\Common;
 
 /**
  * Interface ProcessorInterface
- * @package Subapp\Pack\Runtime
+ * @package Subapp\Pack\Common
  */
 interface ProcessorInterface
 {

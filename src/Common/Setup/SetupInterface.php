@@ -1,13 +1,13 @@
 <?php
 
-namespace Subapp\Pack\Runtime\Setup;
+namespace Subapp\Pack\Common\Setup;
 
-use Subapp\Pack\Runtime\Config\ConfigParametersInterface;
-use Subapp\Pack\Runtime\ProcessorInterface;
+use Subapp\Pack\Common\Config\ConfigParametersInterface;
+use Subapp\Pack\Common\ProcessorInterface;
 
 /**
  * Interface SetupInterface
- * @package Subapp\Pack\Runtime\Setup
+ * @package Subapp\Pack\Common\Setup
  */
 interface SetupInterface
 {

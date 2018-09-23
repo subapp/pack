@@ -9,8 +9,8 @@ use Subapp\Pack\Optimizer\Hydrator\HydratorInterface;
 use Subapp\Pack\Optimizer\Packer\PackerInterface;
 use Subapp\Pack\Optimizer\Schema\SchemaInterface;
 use Subapp\Pack\Optimizer\Schema\Version;
-use Subapp\Pack\Runtime\Config\ConfigParameters;
-use Subapp\Pack\Runtime\Config\ConfigParametersInterface;
+use Subapp\Pack\Common\Config\ConfigParameters;
+use Subapp\Pack\Common\Config\ConfigParametersInterface;
 
 /**
  * Class Facade

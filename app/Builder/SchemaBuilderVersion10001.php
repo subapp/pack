@@ -5,6 +5,8 @@ namespace Subapp\TestApp\Builder;
 use Subapp\Pack\Optimizer\Builder\AbstractSchemaBuilder;
 use Subapp\Pack\Optimizer\Schema\Column\BitMaskColumn;
 use Subapp\Pack\Optimizer\Schema\Column\BooleanColumn;
+use Subapp\Pack\Optimizer\Schema\Column\DoubleColumn;
+use Subapp\Pack\Optimizer\Schema\Column\FloatColumn;
 use Subapp\Pack\Optimizer\Schema\Column\IntegerColumn;
 use Subapp\Pack\Optimizer\Schema\Column\StringColumn;
 use Subapp\Pack\Optimizer\Schema\Column\TimestampColumn;
@@ -39,6 +41,11 @@ class SchemaBuilderVersion10001 extends AbstractSchemaBuilder
         ));
     
         $schema->addColumn(new StringColumn('userName', 'name', 8, 200));
+        
+        $schema->addColumn(new FloatColumn('f1', 'float1', 30));
+        $schema->addColumn(new FloatColumn('f2', 'float2', 40));
+        $schema->addColumn(new DoubleColumn('d1', 'double1', 50, 6));
+        $schema->addColumn(new DoubleColumn('d2', 'double2', 60, 6));
     }
     
 }

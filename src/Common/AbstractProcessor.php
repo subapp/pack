@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\Pack\Runtime;
+namespace Subapp\Pack\Common;
 
 class AbstractProcessor implements ProcessorInterface
 {

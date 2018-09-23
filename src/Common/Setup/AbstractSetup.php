@@ -1,12 +1,12 @@
 <?php
 
-namespace Subapp\Pack\Runtime\Setup;
+namespace Subapp\Pack\Common\Setup;
 
-use Subapp\Pack\Runtime\Config\ConfigParameters;
+use Subapp\Pack\Common\Config\ConfigParameters;
 
 /**
  * Class AbstractSetup
- * @package Subapp\Pack\Runtime\Setup
+ * @package Subapp\Pack\Common\Setup
  */
 abstract class AbstractSetup implements SetupInterface
 {

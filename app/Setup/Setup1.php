@@ -2,8 +2,8 @@
 
 namespace Subapp\TestApp\Setup;
 
-use Subapp\Pack\Runtime\ProcessorInterface;
-use Subapp\Pack\Runtime\Setup\AbstractSetup;
+use Subapp\Pack\Common\ProcessorInterface;
+use Subapp\Pack\Common\Setup\AbstractSetup;
 
 /**
  * Class Setup1
