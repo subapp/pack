@@ -24,9 +24,9 @@ class CombinedColumn extends AbstractColumnLength implements ColumnsKeeperInterf
     /**
      * @inheritDoc
      */
-    public function __construct($name, $position, $length, $separator, ColumnInterface ...$columns)
+    public function __construct($name, $length, $position, $separator, ColumnInterface ...$columns)
     {
-        parent::__construct($name, null, $position, $length);
+        parent::__construct($name, null, $length, $position);
         
         $this->separator = $separator;
         $this->columns = $columns;

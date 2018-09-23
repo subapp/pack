@@ -17,9 +17,9 @@ class BitMaskColumn extends IntegerColumn implements ColumnsKeeperInterface
     /**
      * @inheritDoc
      */
-    public function __construct($name, $position, BooleanColumn ...$columns)
+    public function __construct($name, $length, $position, BooleanColumn ...$columns)
     {
-        parent::__construct($name, null, $position, IntegerColumn::INT32);
+        parent::__construct($name, null, $length, $position);
 
         $this->columns = $columns;
     }

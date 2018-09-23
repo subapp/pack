@@ -1,4 +1,0 @@
-subapp:
-  optimizer:
-    builder:
-      defaultNamespace: Subapp\\TestApp\\Builder

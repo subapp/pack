@@ -16,7 +16,7 @@ class TimestampColumn extends AbstractColumnLength
      */
     public function __construct($name, $column, $position)
     {
-        parent::__construct($name, $column, $position, IntegerColumn::INT32);
+        parent::__construct($name, $column, IntegerColumn::INT32, $position);
     }
     
     /**

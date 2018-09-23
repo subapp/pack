@@ -17,7 +17,15 @@ class Setup1 extends AbstractSetup
      */
     public function setup(ProcessorInterface $processor)
     {
-        $processor;
+        $this->getConfiguration();
     }
     
+    /**
+     * @inheritDoc
+     */
+    public function getConfigurationFile()
+    {
+        return __DIR__ . '/../pack1.yml';
+    }
+
 }
