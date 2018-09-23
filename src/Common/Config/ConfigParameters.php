@@ -12,11 +12,19 @@ class ConfigParameters extends ParametersCollection implements ConfigParametersI
 {
     
     /**
+     * @inheritdoc
+     */
+    public function getVersion()
+    {
+        return $this->path('subapp.schema.version');
+    }
+    
+    /**
      * @inheritDoc
      */
-    public function getDefaultNamespace()
+    public function getNamespace()
     {
-        return $this->path('subapp.optimizer.builder.defaultNamespace');
+        return $this->path('subapp.schema.builder.namespace');
     }
     
 }

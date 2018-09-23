@@ -2,8 +2,18 @@
 
 namespace Subapp\TestApp;
 
-use Subapp\Pack\Optimizer\Schema\Version;
+use Subapp\Pack\Facade;
+use Subapp\TestApp\Entity\BigCacheDataFilled;
+use Subapp\TestApp\Setup\Setup1;
 
 include_once __DIR__ . '/../vendor/autoload.php';
 
-$version = new Version(10001);
+$entity = new BigCacheDataFilled();
+
+$facade = new Facade();
+
+$facade->setup(new Setup1());
+
+$serialized = $facade->serialize($entity);
+
+var_dump($serialized);

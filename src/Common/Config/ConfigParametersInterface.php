@@ -12,8 +12,13 @@ interface ConfigParametersInterface extends ParametersInterface
 {
     
     /**
-     * @return mixed
+     * @return integer
      */
-    public function getDefaultNamespace();
+    public function getVersion();
+    
+    /**
+     * @return string
+     */
+    public function getNamespace();
     
 }

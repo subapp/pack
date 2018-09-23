@@ -4,6 +4,7 @@ namespace Subapp\Pack\Optimizer;
 
 use Subapp\Pack\Optimizer\Builder\PackerBuilder;
 use Subapp\Pack\Optimizer\Collection\Values;
+use Subapp\Pack\Optimizer\Factory\FactoryRepository;
 use Subapp\Pack\Optimizer\Hydrator\Hydrator;
 use Subapp\Pack\Optimizer\Hydrator\HydratorInterface;
 use Subapp\Pack\Optimizer\Packer\PackerInterface;
@@ -13,10 +14,10 @@ use Subapp\Pack\Common\Config\ConfigParameters;
 use Subapp\Pack\Common\Config\ConfigParametersInterface;
 
 /**
- * Class Facade
+ * Class Processor
  * @package Subapp\Pack\Optimizer
  */
-class Facade
+final class Optimizer
 {
     
     /**
@@ -56,18 +57,21 @@ class Facade
     {
         $this->parameters = $parameters;
         $this->factories = new FactoryRepository();
+        $this->initialize();
     }
     
     /**
-     * @param Version $version
-     * @param string  $namespace
+     * @return void
      */
-    public function initialize(Version $version, $namespace = null)
+    private function initialize()
     {
         if (!$this->initialized) {
+            $parameters = $this->getParameters();
+            
+            $version = new Version($parameters->getVersion());
             $factory = $this->getFactories()->getSchemaBuilderFactory();
             $packerBuilder = new PackerBuilder();
-            $schemaBuilder = $factory->getSchemaBuilder($version, $namespace ?? $this->parameters->getDefaultNamespace());
+            $schemaBuilder = $factory->getSchemaBuilder($version, $parameters->getNamespace());
     
             $this->setSchema($schemaBuilder->getSchema());
             $this->setPacker($packerBuilder->getPacker($this->getSchema()));
@@ -190,6 +194,14 @@ class Facade
     public function setHydrator(HydratorInterface $hydrator)
     {
         $this->hydrator = $hydrator;
+    }
+    
+    /**
+     * @return ConfigParametersInterface
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
     }
     
 }

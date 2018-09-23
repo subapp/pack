@@ -3,7 +3,7 @@
 namespace Subapp\TestApp;
 
 use Subapp\Pack\Optimizer\Collection\Values;
-use Subapp\Pack\Optimizer\Facade;
+use Subapp\Pack\Optimizer\Optimizer;
 use Subapp\Pack\Optimizer\Schema\Version;
 use Subapp\Pack\Common\Config\ConfigParameters;
 use Subapp\TestApp\Entity\BigCacheData;
@@ -12,17 +12,15 @@ use Subapp\TestApp\Entity\BigCacheDataFilled;
 include_once __DIR__ . '/../vendor/autoload.php';
 
 $version = new Version(10001);
-$facade = new Facade(ConfigParameters::createFromFile(__DIR__ . '/pack.yml'));
-
-$facade->initialize($version);
+$optimizer = new Optimizer(ConfigParameters::createFromFile(__DIR__ . '/pack.yml'));
 
 $entity = new BigCacheDataFilled();
 $empty = new BigCacheData();
 
-$packed = $facade->pack($entity);
-$facade->unpack($packed, $empty);
+$packed = $optimizer->pack($entity);
+$optimizer->unpack($packed, $empty);
 
-$values = $facade->extract($entity, new Values());
+$values = $optimizer->extract($entity, new Values());
 
 $empty->created = $empty->created->format(DATE_ATOM);
 $empty->updated = $empty->updated->format(DATE_ATOM);

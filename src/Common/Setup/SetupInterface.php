@@ -3,7 +3,7 @@
 namespace Subapp\Pack\Common\Setup;
 
 use Subapp\Pack\Common\Config\ConfigParametersInterface;
-use Subapp\Pack\Common\ProcessorInterface;
+use Subapp\Pack\Facade;
 
 /**
  * Interface SetupInterface
@@ -13,9 +13,9 @@ interface SetupInterface
 {
     
     /**
-     * @param ProcessorInterface $processor
+     * @param Facade $facade
      */
-    public function setup(ProcessorInterface $processor);
+    public function setup(Facade $facade);
     
     /**
      * @return ConfigParametersInterface

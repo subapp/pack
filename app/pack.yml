@@ -1,4 +1,7 @@
 subapp:
-  optimizer:
+  setup:
+    ~
+  schema:
+    version: 10001
     builder:
-      defaultNamespace: Subapp\TestApp\Builder
+      namespace: Subapp\TestApp\Builder

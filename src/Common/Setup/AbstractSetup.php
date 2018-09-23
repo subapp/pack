@@ -12,7 +12,7 @@ abstract class AbstractSetup implements SetupInterface
 {
     
     /**
-     * @inheritDoc
+     * @return ConfigParameters
      */
     public function getConfiguration()
     {

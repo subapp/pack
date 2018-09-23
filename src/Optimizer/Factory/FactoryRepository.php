@@ -1,10 +1,6 @@
 <?php
 
-namespace Subapp\Pack\Optimizer;
-
-use Subapp\Pack\Optimizer\Factory\AccessorFactory;
-use Subapp\Pack\Optimizer\Factory\SchemaBuilderFactory;
-use Subapp\Pack\Optimizer\Factory\ValueTransformerFactory;
+namespace Subapp\Pack\Optimizer\Factory;
 
 /**
  * Class FactoryRepository
