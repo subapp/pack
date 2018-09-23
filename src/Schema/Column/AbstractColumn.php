@@ -2,6 +2,8 @@
 
 namespace Subapp\Pack\Schema\Column;
 
+use Subapp\Pack\Schema\Type\Type;
+
 /**
  * Class AbstractDefinition
  * @package Subapp\Pack\Schema\Definition
@@ -60,5 +62,13 @@ abstract class AbstractColumn implements ColumnInterface
     {
         return $this->position;
     }
-
+    
+    /**
+     * @inheritDoc
+     */
+    public function getType()
+    {
+        return Type::retrieveTypeObject($this->getPhpType());
+    }
+    
 }

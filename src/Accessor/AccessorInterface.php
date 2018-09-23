@@ -3,10 +3,10 @@
 namespace Subapp\Pack\Accessor;
 
 /**
- * Interface ProviderInterface
+ * Interface AccessorInterface
  * @package Subapp\Pack\Accessor
  */
-interface DataAccessorInterface
+interface AccessorInterface
 {
 
     /**
@@ -20,5 +20,15 @@ interface DataAccessorInterface
      * @param string|integer $value
      */
     public function setValue($keyName, $value);
+    
+    /**
+     * @var $source array|object
+     */
+    public function setSource($source);
+    
+    /**
+     * @return array|object
+     */
+    public function getSource();
 
 }

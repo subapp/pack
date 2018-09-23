@@ -6,14 +6,9 @@ namespace Subapp\Pack\Accessor;
  * Class ObjectDataAccessor
  * @package Subapp\Pack\Accessor
  */
-class ObjectDataAccessor implements DataAccessorInterface
+class ObjectAccessor extends AbstractAccessor
 {
-
-    /**
-     * @var object
-     */
-    private $object;
-
+    
     /**
      * @var \ReflectionClass
      */
@@ -21,12 +16,13 @@ class ObjectDataAccessor implements DataAccessorInterface
 
     /**
      * ObjectDataAccessor constructor.
-     * @param $object
+     * @param $source
      */
-    public function __construct($object)
+    public function __construct($source)
     {
-        $this->object = $object;
-        $this->reflection = new \ReflectionObject($object);
+        parent::__construct($source);
+        
+        $this->reflection = new \ReflectionObject($source);
     }
 
     /**
@@ -34,7 +30,7 @@ class ObjectDataAccessor implements DataAccessorInterface
      */
     public function getValue($keyName)
     {
-        return $this->getAccessibleProperty($keyName)->getValue($this->object);
+        return $this->getAccessibleProperty($keyName)->getValue($this->source);
     }
 
     /**
@@ -42,7 +38,7 @@ class ObjectDataAccessor implements DataAccessorInterface
      */
     public function setValue($keyName, $value)
     {
-        $this->getAccessibleProperty($keyName)->setValue($this->object, $value);
+        $this->getAccessibleProperty($keyName)->setValue($this->source, $value);
     }
 
     /**

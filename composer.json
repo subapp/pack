@@ -14,7 +14,10 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.1",
+    "ext-json": "*",
+    "ext-msgpack": "*",
+    "subapp/collection": "~1.0"
   },
   "autoload": {
     "psr-4": {

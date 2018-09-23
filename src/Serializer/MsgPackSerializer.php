@@ -10,16 +10,6 @@ class MsgPackSerializer implements SerializerInterface
 {
 
     /**
-     * MsgPackSerializer constructor.
-     */
-    public function __construct()
-    {
-        if (!extension_loaded('msgpack')) {
-            throw new \RuntimeException('Extension msgPack not installed on your server');
-        }
-    }
-
-    /**
      * @inheritDoc
      */
     public function serialize($data)

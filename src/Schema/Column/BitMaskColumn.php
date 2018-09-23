@@ -6,7 +6,7 @@ namespace Subapp\Pack\Schema\Column;
  * Class BitMaskValue
  * @package Subapp\Pack\Schema\Column
  */
-class BitMaskColumn extends IntegerColumn
+class BitMaskColumn extends IntegerColumn implements ColumnsKeeperInterface
 {
 
     /**
@@ -17,11 +17,11 @@ class BitMaskColumn extends IntegerColumn
     /**
      * @inheritDoc
      */
-    public function __construct($name, $position, BooleanColumn ...$values)
+    public function __construct($name, $position, BooleanColumn ...$columns)
     {
         parent::__construct($name, null, $position, IntegerColumn::INT32);
 
-        $this->columns = $values;
+        $this->columns = $columns;
     }
 
     /**

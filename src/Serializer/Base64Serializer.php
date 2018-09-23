@@ -27,7 +27,9 @@ class Base64Serializer implements SerializerInterface
      */
     public function serialize($data)
     {
-        return base64_encode($this->serializer->serialize($data));
+        $data = is_resource($data) ? $data : $this->serializer->serialize($data);
+        
+        return base64_encode($data);
     }
 
     /**
@@ -35,7 +37,9 @@ class Base64Serializer implements SerializerInterface
      */
     public function unserialize($serialized)
     {
-        return $this->serializer->unserialize(base64_decode($serialized));
+        $data = base64_decode($serialized);
+        
+        return is_resource($data) ? $data : $this->serializer->unserialize($data);
     }
 
 }

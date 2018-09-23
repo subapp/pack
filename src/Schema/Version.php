@@ -36,17 +36,33 @@ class Version
      */
     public function getVersion()
     {
-        $version = $this->getIntegerVersion();
-
-        $patch = $version % 100;
-        $version = (integer)$version / 100;
-
-        $minor = $version % 100;
-        $version = (integer)$version / 100;
-
-        return sprintf('v%d.%d.%d', $version, $minor, $patch);
+        return sprintf('v%d.%d.%d', ... $this->getVersionPieces());
     }
-
+    
+    /**
+     * @return string
+     */
+    public function getClassVersion()
+    {
+        return sprintf('Version%s%s%s', ... $this->getVersionPieces());
+    }
+    
+    /**
+     * @return array
+     */
+    public function getVersionPieces()
+    {
+        $version = $this->getIntegerVersion();
+    
+        $patch = $version % 100;
+        $version = (integer)($version / 100);
+    
+        $minor = $version % 100;
+        $version = (integer)($version / 100);
+        
+        return [$version, $minor, $patch,];
+    }
+    
     /**
      * @inheritDoc
      */
