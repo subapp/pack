@@ -15,7 +15,7 @@ class SchemaBuilderFactory
     /**
      * @param Version $version
      * @param         $namespace
-     * @return
+     * @return SchemaBuilderInterface
      * @throws \RuntimeException
      */
     public function getSchemaBuilder(Version $version, $namespace)
@@ -26,8 +26,8 @@ class SchemaBuilderFactory
         if (!class_exists($class)) {
             throw new \RuntimeException(sprintf('Could not be found builder class name %s', $class));
         }
-    
-        if (is_subclass_of($class, SchemaBuilderInterface::class)) {
+        
+        if (!is_subclass_of($class, SchemaBuilderInterface::class)) {
             throw new \RuntimeException(sprintf('Schema builder must implement %s interface', SchemaBuilderInterface::class));
         }
         

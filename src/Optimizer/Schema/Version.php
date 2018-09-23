@@ -36,7 +36,7 @@ class Version
      */
     public function getVersion()
     {
-        return sprintf('v%d.%d.%d', ... $this->getVersionPieces());
+        return sprintf('v%d.%d.%d', ... $this->getVersions());
     }
     
     /**
@@ -44,13 +44,13 @@ class Version
      */
     public function getClassVersion()
     {
-        return sprintf('Version%s%s%s', ... $this->getVersionPieces());
+        return sprintf('Version%d%02d%02d', ... $this->getVersions());
     }
     
     /**
      * @return array
      */
-    public function getVersionPieces()
+    public function getVersions()
     {
         $version = $this->getIntegerVersion();
     

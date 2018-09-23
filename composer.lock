@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "032e1a62c310155d9376c1c47f978e0f",
+    "content-hash": "faa4691e55fadd9bcca60341b890d106",
     "packages": [
         {
             "name": "subapp/collection",
-            "version": "v1.0.0",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subapp/collection.git",
-                "reference": "4bea827e3107444613a46cec2741798b36989a0e"
+                "reference": "1d74938500633dc904f87a567f5fefd1c4c429a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subapp/collection/zipball/4bea827e3107444613a46cec2741798b36989a0e",
-                "reference": "4bea827e3107444613a46cec2741798b36989a0e",
+                "url": "https://api.github.com/repos/subapp/collection/zipball/1d74938500633dc904f87a567f5fefd1c4c429a5",
+                "reference": "1d74938500633dc904f87a567f5fefd1c4c429a5",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 "collection",
                 "php collection"
             ],
-            "time": "2018-09-20T06:25:59+00:00"
+            "time": "2018-09-23T15:05:47+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -175,7 +175,10 @@
     "platform": {
         "php": ">=7.1",
         "ext-json": "*",
-        "ext-msgpack": "*"
+        "ext-mbstring": "*",
+        "ext-msgpack": "*",
+        "ext-bz2": "*",
+        "ext-zlib": "*"
     },
     "platform-dev": []
 }

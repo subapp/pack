@@ -56,14 +56,15 @@ abstract class AbstractSchemaBuilder implements SchemaBuilderInterface
     public function buildSchema()
     {
         if (!$this->initialized) {
-            $this->doBuildSchema();
             $this->initialized = true;
+            $this->doBuildSchema($this->schema);
         }
     }
     
     /**
+     * @param SchemaInterface $schema
      * @return void
      */
-    abstract protected function doBuildSchema();
+    abstract protected function doBuildSchema(SchemaInterface $schema);
     
 }
