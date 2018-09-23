@@ -22,7 +22,7 @@ class DataEntityTest
         $this->created_at = new \DateTime('now - 127 days');
         $this->updated_at = new \DateTime('now - 32 days');
         
-        $this->hotelDescription = str_repeat('Lorem ipsum... ', 32);
+        $this->hotelDescription = str_repeat('Lorem ', 8);
         $this->entity_name = __METHOD__;
     }
 
