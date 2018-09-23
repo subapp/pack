@@ -5,6 +5,8 @@ namespace Subapp\Pack\Optimizer\Accessor;
 /**
  * Class ObjectDataAccessor
  * @package Subapp\Pack\Optimizer\Accessor
+ *
+ * @property \stdClass $source
  */
 class ObjectAccessor extends AbstractAccessor
 {

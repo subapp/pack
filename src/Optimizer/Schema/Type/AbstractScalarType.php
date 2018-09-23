@@ -16,7 +16,7 @@ abstract class AbstractScalarType extends Type
      */
     public function toPhpValue($value)
     {
-        static::validateScalarValue($value);
+        $this->validateScalarValue($value);
         
         return $value;
     }
@@ -26,7 +26,7 @@ abstract class AbstractScalarType extends Type
      *
      * @throws \InvalidArgumentException
      */
-    private static function validateScalarValue($value)
+    private function validateScalarValue($value)
     {
         if (!is_scalar($value)) {
             throw new \InvalidArgumentException(sprintf('Type handler %s expect only scalar value types', static::class));
@@ -40,7 +40,7 @@ abstract class AbstractScalarType extends Type
      */
     public function toPlatformValue($value)
     {
-        static::validateScalarValue($value);
+        $this->validateScalarValue($value);
         
         return $value;
     }

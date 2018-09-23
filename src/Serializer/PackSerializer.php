@@ -10,9 +10,7 @@ class PackSerializer implements SerializerInterface
 {
     
     /**
-     * @todo intersection of module depends
      * PackSerializer constructor.
-     * @param $packer
      */
     public function __construct()
     {

@@ -2,6 +2,8 @@
 
 namespace Subapp\Pack\App;
 
+use Subapp\Pack\Compressor\BzCompressor;
+use Subapp\Pack\Compressor\GzCompressor;
 use Subapp\Pack\Optimizer\Collection\Values;
 use Subapp\Pack\Optimizer\Factory\AccessorFactory;
 use Subapp\Pack\Optimizer\Hydrator\Hydrator;
@@ -34,9 +36,8 @@ $schema->addColumn(new BitMaskColumn('mask', 120,
     new BooleanColumn('readable', 'is_readable', 1000)
 ));
 
-$schema->addColumn(new CombinedColumn('data1', 30, 80, ';',
-    new StringColumn('name', 'entity_name', 1000, 32),
-    new DatetimeColumn('created', 'created_at', 1011, 32),
+$schema->addColumn(new CombinedColumn('data1', 30, 32, ';',
+    new TimestampColumn('created', 'created_at', 1011),
     new TimestampColumn('updated', 'updated_at', 1001),
     new BooleanColumn('readable', 'is_readable', 1000)
 ));
@@ -58,11 +59,11 @@ $entity = new DataEntityTest();
 // $builder = $builderFactory->getSchemaBuilder($version, '\\Builder');
 
 $factory = new AccessorFactory();
-$input = $factory->getAccessor($entity);
+$inputEntity = $factory->getAccessor($entity);
 $output = $factory->getAccessor([]);
 
 $hydrator = new Hydrator($schema);
-$hydrator->extract($input, $output);
+$hydrator->extract($inputEntity, $output);
 
 $collapsedArray = $output->getSource();
 
@@ -93,9 +94,18 @@ var_dump(json_encode($values));
 $packed = $packer->pack($values);
 
 $inputValues = new Values();
-
-var_dump($packed);
-
 $packer->unpack($packed, $inputValues);
 
-var_dump($inputValues->toJSON());
+var_dump($packed);
+var_dump($inputValues->toArray());
+
+$output4 = $factory->getAccessor([]);
+$hydrator->hydrate($factory->getAccessor($inputValues->toArray()), $output4);
+
+var_dump($output4);
+
+$compressor = new GzCompressor();
+
+$json = json_encode($output4->getSource());
+
+var_dump($json, $compressor->compress($packed));

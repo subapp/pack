@@ -5,9 +5,7 @@
     "php data pack", "data pack"
   ],
   "authors": [
-    {
-      "name": "Ivan Hontarenko"
-    }
+    {"name": "Ivan Hontarenko"}
   ],
   "license": "MIT",
   "type": "library",
@@ -16,12 +14,16 @@
   "require": {
     "php": ">=7.1",
     "ext-json": "*",
+    "ext-mbstring": "*",
     "ext-msgpack": "*",
+    "ext-bz2": "*",
+    "ext-zlib": "*",
     "subapp/collection": "~1.0"
   },
   "autoload": {
     "psr-4": {
-      "Subapp\\Pack\\": "src/"
+      "Subapp\\Pack\\": "src/",
+      "Subapp\\TestApp\\": "app/"
     }
   }
 }

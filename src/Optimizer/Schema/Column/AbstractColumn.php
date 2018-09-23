@@ -81,7 +81,11 @@ abstract class AbstractColumn implements ColumnInterface
      */
     public function getType()
     {
-        return Type::retrieveTypeObject($this->getTypeName());
+        $columnType = Type::retrieveTypeObject($this->getTypeName());
+        
+        $columnType->setLength($this->getLength());
+        
+        return $columnType;
     }
     
 }

@@ -50,8 +50,11 @@ class Packer implements PackerInterface
     public function unpack($value, ValuesInterface $values)
     {
         $pattern = $this->builder->getUnpackFormat();
-
-        $values->batch($this->pack->unpack($pattern, $value));
+        
+        $unpacked = $this->pack->unpack($pattern, $value);
+        $unpacked = array_map('trim', $unpacked);
+        
+        $values->batch($unpacked);
     }
     
 }

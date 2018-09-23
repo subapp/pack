@@ -44,7 +44,7 @@ final class PackFormatBuilder
         $schema = $this->getSchema();
         
         foreach ($schema->getColumns() as $column) {
-            $format = sprintf('%s%s', $format, $this->getNormalizedPackFormat($column));
+            $format = sprintf('%s%s', $format, $this->getNormalizedFormat($column));
         }
         
         return $format;
@@ -59,7 +59,7 @@ final class PackFormatBuilder
         $schema = $this->getSchema();
         
         foreach ($schema->getColumns() as $column) {
-            $format = sprintf('%s/%s%s', $format, $this->getNormalizedPackFormat($column), $column->getName());
+            $format = sprintf('%s/%s%s', $format, $this->getNormalizedFormat($column), $column->getName());
         }
         
         return trim($format, '/');
@@ -69,13 +69,12 @@ final class PackFormatBuilder
      * @param ColumnInterface $column
      * @return string
      */
-    private function getNormalizedPackFormat(ColumnInterface $column)
+    private function getNormalizedFormat(ColumnInterface $column)
     {
         $mapping = $this->getMapping();
         $format = $mapping->getPackFormat($column->getTypeName());
-        $isString = in_array($column->getTypeName(), [Type::DATETIME, Type::STRING, Type::CHAR,]);
-        
-        if ($isString && $column->getLength()) {
+
+        if ($mapping->isStringType($column->getTypeName()) && $column->getLength()) {
             $format = sprintf('%s%d', $format, $column->getLength());
         }
         

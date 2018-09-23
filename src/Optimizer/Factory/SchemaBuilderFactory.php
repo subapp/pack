@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Optimizer\Factory;
 
+use Subapp\Pack\Optimizer\Builder\SchemaBuilderInterface;
 use Subapp\Pack\Optimizer\Schema\Version;
 
 /**
@@ -25,8 +26,12 @@ class SchemaBuilderFactory
         if (!class_exists($class)) {
             throw new \RuntimeException(sprintf('Could not be found builder class name %s', $class));
         }
+    
+        if (is_subclass_of($class, SchemaBuilderInterface::class)) {
+            throw new \RuntimeException(sprintf('Schema builder must implement %s interface', SchemaBuilderInterface::class));
+        }
         
-        return new $class();
+        return new $class($version);
     }
     
     /**

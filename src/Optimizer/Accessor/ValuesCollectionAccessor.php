@@ -2,13 +2,15 @@
 
 namespace Subapp\Pack\Optimizer\Accessor;
 
+use Subapp\Pack\Optimizer\Collection\ValuesInterface;
+
 /**
- * Class ArrayIteratorAccessor
+ * Class ValuesCollectionAccessor
  * @package Subapp\Pack\Optimizer\Accessor
  *
- * @property \ArrayIterator $source
+ * @property ValuesInterface $source
  */
-class ArrayIteratorAccessor extends AbstractAccessor
+class ValuesCollectionAccessor extends AbstractAccessor
 {
     
     /**

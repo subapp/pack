@@ -31,7 +31,7 @@ class CombinedKeeperValueTransformer extends AbstractColumnsKeeperValueTransform
             $value = implode($column->getSeparator(), $values);
         }
         
-        $output->setValue($column->getName(), $value);
+        $output->setValue($column->getName(), $this->toPlatformValue($value, $column));
     }
     
     /**

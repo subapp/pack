@@ -5,6 +5,8 @@ namespace Subapp\Pack\Optimizer\Accessor;
 /**
  * Class ArrayAccessor
  * @package Subapp\Pack\Optimizer\Accessor
+ *
+ * @property array $source
  */
 class ArrayAccessor extends AbstractAccessor
 {
