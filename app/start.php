@@ -2,7 +2,7 @@
 
 namespace Subapp\TestApp;
 
-use Subapp\Pack\Facade;
+use Subapp\Pack\ProcessHandlerCollection;
 use Subapp\TestApp\Entity\BigCacheDataFilled;
 use Subapp\TestApp\Setup\Setup1;
 
@@ -10,10 +10,12 @@ include_once __DIR__ . '/../vendor/autoload.php';
 
 $entity = new BigCacheDataFilled();
 
-$facade = new Facade();
+$handler = new ProcessHandlerCollection();
 
-$facade->setup(new Setup1());
+$handler->setup(new Setup1());
 
-$serialized = $facade->serialize($entity);
+$serialized = $handler->serialize($entity);
+
+//$entity->stringData = $facade->serialize($entity->stringData);
 
 var_dump($serialized);

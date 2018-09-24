@@ -3,7 +3,7 @@
 namespace Subapp\Pack\Common\Setup;
 
 use Subapp\Pack\Common\Config\ConfigParametersInterface;
-use Subapp\Pack\Facade;
+use Subapp\Pack\ProcessHandlerCollection;
 
 /**
  * Interface SetupInterface
@@ -13,9 +13,9 @@ interface SetupInterface
 {
     
     /**
-     * @param Facade $facade
+     * @param ProcessHandlerCollection $handler
      */
-    public function setup(Facade $facade);
+    public function setup(ProcessHandlerCollection $handler);
     
     /**
      * @return ConfigParametersInterface

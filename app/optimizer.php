@@ -2,9 +2,9 @@
 
 namespace Subapp\TestApp;
 
-use Subapp\Pack\Optimizer\Collection\Values;
-use Subapp\Pack\Optimizer\Optimizer;
-use Subapp\Pack\Optimizer\Schema\Version;
+use Subapp\Pack\Compactor\Collection\Values;
+use Subapp\Pack\Compactor\Optimizer;
+use Subapp\Pack\Compactor\Schema\Version;
 use Subapp\Pack\Common\Config\ConfigParameters;
 use Subapp\TestApp\Entity\BigCacheData;
 use Subapp\TestApp\Entity\BigCacheDataFilled;
@@ -18,8 +18,9 @@ $entity = new BigCacheDataFilled();
 $empty = new BigCacheData();
 
 $packed = $optimizer->pack($entity);
+var_dump($empty, $packed);
 $optimizer->unpack($packed, $empty);
-
+var_dump($empty);
 $values = $optimizer->extract($entity, new Values());
 
 $empty->created = $empty->created->format(DATE_ATOM);
@@ -44,4 +45,6 @@ echo sprintf("Packed Data with JSON: %s %% \n", round(($jsonLength / $packedLeng
 
 echo "-----\n\n";
 
-var_dump($packed, $json, $jsonShort, $empty); die;
+var_dump($packed, $json, $jsonShort);
+
+var_dump($empty);

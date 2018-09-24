@@ -2,7 +2,7 @@
 
 ## Data Packer and Serializator
 
-### Optimizer Result
+### Compactor Result
 ```
 php app/optimizer.php 
 Packed: 36 bytes

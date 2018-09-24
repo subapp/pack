@@ -43,7 +43,7 @@ class GzCompressor implements CompressorInterface
      */
     public function decompress($compressed)
     {
-        return gzuncompress($compressed);
+        return gzdecode($compressed);
     }
     
 }

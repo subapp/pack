@@ -4,8 +4,9 @@ namespace Subapp\TestApp\Setup;
 
 use Subapp\Pack\Common\Setup\AbstractSetup;
 use Subapp\Pack\Compressor\GzCompressor;
-use Subapp\Pack\Facade;
-use Subapp\Pack\Optimizer\Optimizer;
+use Subapp\Pack\ProcessHandlerCollection;
+use Subapp\Pack\Compactor\Optimizer;
+use Subapp\Pack\Serializer\JsonSerializer;
 use Subapp\Pack\Serializer\MsgPackSerializer;
 use Subapp\Pack\Serializer\PhpSerializer;
 
@@ -19,13 +20,13 @@ class Setup1 extends AbstractSetup
     /**
      * @inheritDoc
      */
-    public function setup(Facade $facade)
+    public function setup(ProcessHandlerCollection $handler)
     {
-        $facade->setOptimizer(new Optimizer($this->getConfiguration()));
-//        $facade->setCompressor(new GzCompressor());
-//        $facade->addSerializer(new PhpSerializer());
-//        $facade->addSerializer(new MsgPackSerializer());
-        
+        $handler->addProcess(new Optimizer($this->getConfiguration()));
+        $handler->addProcess(new GzCompressor());
+        $handler->addProcess(new JsonSerializer());
+        $handler->addProcess(new PhpSerializer());
+        $handler->addProcess(new MsgPackSerializer());
     }
     
     /**
