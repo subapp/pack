@@ -2,7 +2,8 @@
 
 namespace Subapp\Pack\Common\Setup;
 
-use Subapp\Pack\Common\Config\ConfigParameters;
+use Subapp\Pack\Compactor\Factory\SchemaBuilderFactory;
+use Subapp\Pack\Compactor\Schema\Version;
 
 /**
  * Class AbstractSetup
@@ -10,13 +11,17 @@ use Subapp\Pack\Common\Config\ConfigParameters;
  */
 abstract class AbstractSetup implements SetupInterface
 {
-    
+
     /**
-     * @return ConfigParameters
+     * @param Version $version
+     * @return \Subapp\Pack\Compactor\Schema\SchemaInterface
      */
-    public function getConfiguration()
+    protected function loadSchema(Version $version)
     {
-        return ConfigParameters::createFromFile($this->getConfigurationFile());
+        $factory = new SchemaBuilderFactory();
+        $builder = $factory->getSchemaBuilder($version, 'Subapp\\TestApp\\Builder');
+
+        return $builder->getSchema();
     }
-    
+
 }

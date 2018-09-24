@@ -17,14 +17,4 @@ interface SetupInterface
      */
     public function setup(ProcessHandlerCollection $handler);
     
-    /**
-     * @return ConfigParametersInterface
-     */
-    public function getConfiguration();
-    
-    /**
-     * @return string
-     */
-    public function getConfigurationFile();
-    
 }

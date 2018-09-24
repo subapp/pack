@@ -1,10 +1,10 @@
 <?php
 
-namespace Subapp\Pack\ProcessHandler;
+namespace Subapp\Pack\Decorator;
 
 /**
  * Interface ProcessHandlerInterface
- * @package Subapp\Pack\ProcessHandler
+ * @package Subapp\Pack\Decorator
  */
 interface ProcessHandlerInterface
 {

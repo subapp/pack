@@ -20,7 +20,7 @@ abstract class AbstractValueTransformer implements ValueTransformerInterface
     public function getConvertedValue(ColumnInterface $column, AccessorInterface $accessor)
     {
         $value = $accessor->getValue($column->getColumnName());
-        
+
         return $this->toPlatformValue($value, $column);
     }
     

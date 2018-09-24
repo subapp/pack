@@ -5,7 +5,6 @@ namespace Subapp\TestApp;
 use Subapp\Pack\Compactor\Collection\Values;
 use Subapp\Pack\Compactor\Optimizer;
 use Subapp\Pack\Compactor\Schema\Version;
-use Subapp\Pack\Common\Config\ConfigParameters;
 use Subapp\TestApp\Entity\BigCacheData;
 use Subapp\TestApp\Entity\BigCacheDataFilled;
 

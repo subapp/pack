@@ -46,7 +46,7 @@ final class PackFormatBuilder
         foreach ($schema->getColumns() as $column) {
             $format = sprintf('%s%s', $format, $this->getNormalizedFormat($column));
         }
-        
+
         return $format;
     }
     
@@ -61,7 +61,7 @@ final class PackFormatBuilder
         foreach ($schema->getColumns() as $column) {
             $format = sprintf('%s/%s%s', $format, $this->getNormalizedFormat($column), $column->getName());
         }
-        
+
         return trim($format, '/');
     }
     
@@ -74,8 +74,9 @@ final class PackFormatBuilder
         $mapping = $this->getMapping();
         $format = $mapping->getPackFormat($column->getTypeName());
 
-        if ($mapping->isStringType($column->getTypeName()) && $column->getLength()) {
-            $format = sprintf('%s%d', $format, $column->getLength());
+        if ($mapping->isStringType($column->getTypeName())) {
+            $length = $column->getLength();
+            $format = sprintf('%s%s', $format, $length ? $length : '*');
         }
         
         return $format;

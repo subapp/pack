@@ -1,13 +1,14 @@
 <?php
 
-namespace Subapp\Pack\ProcessHandler;
+namespace Subapp\Pack\Decorator;
 
+use Subapp\Pack\Compactor\CompactorInterface;
 use Subapp\Pack\Compressor\CompressorInterface;
 use Subapp\Pack\Serializer\SerializerInterface;
 
 /**
  * Class ProcessHandlerFactory
- * @package Subapp\Pack\ProcessHandler
+ * @package Subapp\Pack\Decorator
  */
 class ProcessHandlerFactory
 {
@@ -27,8 +28,9 @@ class ProcessHandlerFactory
             case ($process instanceof CompressorInterface):
                 $handler = new CompressorProcessHandler($process);
                 break;
-//            case ($process instanceof SerializerInterface):
-//                break;
+            case ($process instanceof CompactorInterface):
+                $handler = new CompactorProcessHandler($process);
+                break;
             default:
                 throw new \InvalidArgumentException(sprintf('Unsupported process type (%s) for process-handler',
                     is_object($process) ? get_class($process) : gettype($process)));

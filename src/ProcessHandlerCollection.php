@@ -4,8 +4,8 @@ namespace Subapp\Pack;
 
 use Subapp\Collection\Collection;
 use Subapp\Pack\Common\Setup\SetupInterface;
-use Subapp\Pack\ProcessHandler\ProcessHandlerFactory;
-use Subapp\Pack\ProcessHandler\ProcessHandlerInterface;
+use Subapp\Pack\Decorator\ProcessHandlerFactory;
+use Subapp\Pack\Decorator\ProcessHandlerInterface;
 
 /**
  * Class ProcessHandlerCollection
@@ -65,7 +65,7 @@ class ProcessHandlerCollection implements ProcessHandlerInterface
         $handlers = $this->getHandlers();
 
         for ($index = 0, $length = count($handlers); $index < $length; $index++) {
-            $handlers[$index]->serialize($values);
+            $values = $handlers[$index]->serialize($values);
         }
 
         return $values;
@@ -78,8 +78,8 @@ class ProcessHandlerCollection implements ProcessHandlerInterface
     {
         $handlers = $this->getHandlers();
 
-        for ($index = count($handlers); $index > 0; $index--) {
-            $handlers[$index]->unserialize($values);
+        for ($index = count($handlers) - 1; $index >= 0; $index--) {
+            $values = $handlers[$index]->unserialize($values);
         }
 
         return $values;

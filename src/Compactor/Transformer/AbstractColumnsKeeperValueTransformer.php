@@ -38,6 +38,7 @@ abstract class AbstractColumnsKeeperValueTransformer extends AbstractValueTransf
             $accessor = $this->getArrayAccessor($column, $input);
             
             foreach ($column->getColumns() as $inner) {
+                // @todo this->expand() ?
                 $value = $this->getUnconvertedValue($inner, $accessor);
                 $output->setValue($inner->getColumnName(), $value);
             }

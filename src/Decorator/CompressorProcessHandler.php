@@ -1,12 +1,12 @@
 <?php
 
-namespace Subapp\Pack\ProcessHandler;
+namespace Subapp\Pack\Decorator;
 
 use Subapp\Pack\Compressor\CompressorInterface;
 
 /**
  * Class CompressorProcessHandler
- * @package Subapp\Pack\ProcessHandler
+ * @package Subapp\Pack\Decorator
  */
 class CompressorProcessHandler implements ProcessHandlerInterface
 {

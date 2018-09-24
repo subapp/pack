@@ -1,12 +1,12 @@
 <?php
 
-namespace Subapp\Pack\ProcessHandler;
+namespace Subapp\Pack\Decorator;
 
 use Subapp\Pack\Serializer\SerializerInterface;
 
 /**
  * Class SerializerProcessHandler
- * @package Subapp\Pack\ProcessHandler
+ * @package Subapp\Pack\Decorator
  */
 class SerializerProcessHandler implements ProcessHandlerInterface
 {
