@@ -2,6 +2,8 @@
 
 namespace Subapp\Pack\Compactor\Schema;
 
+use Subapp\Collection\Collection;
+use Subapp\Collection\CollectionInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 
 /**
@@ -17,7 +19,7 @@ class Schema implements SchemaInterface
     private $version;
 
     /**
-     * @var \ArrayIterator
+     * @var CollectionInterface
      */
     private $collection = [];
 
@@ -27,7 +29,7 @@ class Schema implements SchemaInterface
      */
     public function __construct(Version $version)
     {
-        $this->collection = new \ArrayIterator();
+        $this->collection = new Collection([], ColumnInterface::class);
         $this->version = $version;
     }
 
@@ -44,7 +46,7 @@ class Schema implements SchemaInterface
      */
     public function getColumns()
     {
-        $this->collection->uasort(function (ColumnInterface $columnA, ColumnInterface $columnB) {
+        $this->collection->sort(function (ColumnInterface $columnA, ColumnInterface $columnB) {
             return $columnA->getPosition() - $columnB->getPosition();
         });
 

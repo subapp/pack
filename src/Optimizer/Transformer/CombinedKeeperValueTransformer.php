@@ -1,15 +1,15 @@
 <?php
 
-namespace Subapp\Pack\Compactor\Transformer;
+namespace Subapp\Pack\Optimizer\Transformer;
 
-use Subapp\Pack\Compactor\Accessor\AccessorInterface;
-use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
-use Subapp\Pack\Compactor\Schema\Column\ColumnsKeeperInterface;
-use Subapp\Pack\Compactor\Schema\Column\CombinedColumn;
+use Subapp\Pack\Optimizer\Accessor\AccessorInterface;
+use Subapp\Pack\Optimizer\Schema\Column\ColumnInterface;
+use Subapp\Pack\Optimizer\Schema\Column\ColumnsKeeperInterface;
+use Subapp\Pack\Optimizer\Schema\Column\CombinedColumn;
 
 /**
  * Class CombinedKeeperDataProcessor
- * @package Subapp\Pack\Compactor\Transformer
+ * @package Subapp\Pack\Optimizer\ValueCompactor
  */
 class CombinedKeeperValueTransformer extends AbstractColumnsKeeperValueTransformer
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Subapp\Pack\Compactor\Transformer;
+namespace Subapp\Pack\Compactor\ValueCompactor;
 
 use Subapp\Pack\Compactor\Accessor\AccessorInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 
 /**
  * Class AbstractValueTransformer
- * @package Subapp\Pack\Compactor\Transformer
+ * @package Subapp\Pack\Compactor\ValueCompactor
  */
-abstract class AbstractValueTransformer implements ValueTransformerInterface
+abstract class AbstractValueCompactor implements ValueCompactorInterface
 {
 
     /**

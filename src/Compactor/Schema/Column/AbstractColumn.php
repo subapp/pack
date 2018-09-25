@@ -30,6 +30,11 @@ abstract class AbstractColumn implements ColumnInterface
      * @var integer
      */
     protected $length;
+    
+    /**
+     * @var Type
+     */
+    protected $type;
 
     /**
      * AbstractValue constructor.
@@ -81,10 +86,24 @@ abstract class AbstractColumn implements ColumnInterface
      */
     public function getType()
     {
+        $isInitialized = ($this->type instanceof Type);
+        
+        if (!$isInitialized) {
+            $this->type = $this->retrieveType();
+        }
+        
+        return $this->type;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function retrieveType()
+    {
         $columnType = Type::retrieveTypeObject($this->getTypeName());
-        
+    
         $columnType->setLength($this->getLength());
-        
+    
         return $columnType;
     }
     

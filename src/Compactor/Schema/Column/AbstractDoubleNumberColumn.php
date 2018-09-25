@@ -27,9 +27,9 @@ abstract class AbstractDoubleNumberColumn extends AbstractColumn
     /**
      * @inheritDoc
      */
-    public function getType()
+    public function retrieveType()
     {
-        $columnType = parent::getType();
+        $columnType = parent::retrieveType();
         
         $columnType->setPrecision($this->getPrecision());
         

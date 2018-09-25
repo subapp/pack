@@ -32,6 +32,11 @@ interface ColumnInterface
     public function getType();
     
     /**
+     * @return Type
+     */
+    public function retrieveType();
+    
+    /**
      * @return integer
      */
     public function getPosition();

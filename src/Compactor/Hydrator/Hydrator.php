@@ -5,7 +5,7 @@ namespace Subapp\Pack\Compactor\Hydrator;
 use Subapp\Pack\Compactor\Collection\Values;
 use Subapp\Pack\Compactor\Collection\ValuesInterface;
 use Subapp\Pack\Compactor\Accessor\AccessorInterface;
-use Subapp\Pack\Compactor\Factory\ValueTransformerFactory;
+use Subapp\Pack\Compactor\Factory\ValueCompactorFactory;
 use Subapp\Pack\Compactor\Schema\SchemaInterface;
 
 /**
@@ -21,7 +21,7 @@ class Hydrator implements HydratorInterface
     private $schema;
     
     /**
-     * @var ValueTransformerFactory
+     * @var ValueCompactorFactory
      */
     private $factory;
     
@@ -32,7 +32,7 @@ class Hydrator implements HydratorInterface
     public function __construct(SchemaInterface $schema)
     {
         $this->schema = $schema;
-        $this->factory = new ValueTransformerFactory();
+        $this->factory = new ValueCompactorFactory();
     }
     
     
@@ -75,7 +75,7 @@ class Hydrator implements HydratorInterface
     }
 
     /**
-     * @return ValueTransformerFactory
+     * @return ValueCompactorFactory
      */
     public function getFactory()
     {

@@ -36,7 +36,7 @@ class StringType extends AbstractScalarType
      */
     private function validateStringLength($value)
     {
-        if ($this->getLength() && ($length = mb_strlen($value)) > $this->getLength()) {
+        if ($this->getLength() > 0 && ($length = mb_strlen($value)) > $this->getLength()) {
             throw new \InvalidArgumentException(sprintf('String value is greater than allowed size (Allowed: %s bytes, Given: %d bytes)', $this->getLength(), $length));
         }
     }

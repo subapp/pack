@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\Pack\Compactor\Transformer;
+namespace Subapp\Pack\Compactor\ValueCompactor;
 
 use Subapp\Pack\Compactor\Accessor\AccessorInterface;
 use Subapp\Pack\Compactor\Accessor\ArrayAccessor;
@@ -10,9 +10,9 @@ use Subapp\Pack\Compactor\Schema\Column\ColumnsKeeperInterface;
 
 /**
  * Class BitMaskKeeperDataProcessor
- * @package Subapp\Pack\Compactor\Transformer
+ * @package Subapp\Pack\Compactor\ValueCompactor
  */
-class BitMaskKeeperValueTransformer extends AbstractColumnsKeeperValueTransformer
+class BitMaskKeeperValueCompactor extends AbstractColumnsKeeperValueCompactor
 {
     
     /**

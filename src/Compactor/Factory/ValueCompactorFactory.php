@@ -2,19 +2,19 @@
 
 namespace Subapp\Pack\Compactor\Factory;
 
-use Subapp\Pack\Compactor\Transformer\BitMaskKeeperValueTransformer;
-use Subapp\Pack\Compactor\Transformer\CombinedKeeperValueTransformer;
-use Subapp\Pack\Compactor\Transformer\UsualValueTransformer;
-use Subapp\Pack\Compactor\Transformer\ValueTransformerInterface;
+use Subapp\Pack\Compactor\ValueCompactor\BitMaskKeeperValueCompactor;
+use Subapp\Pack\Compactor\ValueCompactor\CombinedKeeperValueCompactor;
+use Subapp\Pack\Compactor\ValueCompactor\UsualValueCompactor;
+use Subapp\Pack\Compactor\ValueCompactor\ValueCompactorInterface;
 use Subapp\Pack\Compactor\Schema\Column\BitMaskColumn;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 use Subapp\Pack\Compactor\Schema\Column\CombinedColumn;
 
 /**
- * Class ValueTransformerFactory
- * @package Subapp\Pack\Compactor\Transformer
+ * Class ValueCompactorFactory
+ * @package Subapp\Pack\Compactor\Factory
  */
-class ValueTransformerFactory
+class ValueCompactorFactory
 {
     
     /**
@@ -24,23 +24,23 @@ class ValueTransformerFactory
     
     /**
      * @param $column
-     * @return ValueTransformerInterface
+     * @return ValueCompactorInterface
      */
     public function getTransformer(ColumnInterface $column)
     {
         switch (true) {
             case ($column instanceof BitMaskColumn):
-                return new BitMaskKeeperValueTransformer();
+                return new BitMaskKeeperValueCompactor();
             case ($column instanceof CombinedColumn):
-                return new CombinedKeeperValueTransformer();
+                return new CombinedKeeperValueCompactor();
             default:
-                return new UsualValueTransformer();
+                return new UsualValueCompactor();
         }
     }
     
     /**
      * @param ColumnInterface $column
-     * @return ValueTransformerInterface
+     * @return ValueCompactorInterface
      */
     public function getSharedTransformer(ColumnInterface $column)
     {

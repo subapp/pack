@@ -15,7 +15,7 @@ class DoubleType extends AbstractScalarType
      */
     public function toPhpValue($value)
     {
-        return round(parent::toPhpValue($value), $this->getPrecision());
+        return (double) round(parent::toPhpValue($value), $this->getPrecision());
     }
     
     /**
@@ -23,7 +23,7 @@ class DoubleType extends AbstractScalarType
      */
     public function toPlatformValue($value)
     {
-        return round(parent::toPlatformValue($value), $this->getPrecision());
+        return (double) round(parent::toPlatformValue($value), $this->getPrecision());
     }
     
     /**

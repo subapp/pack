@@ -1,13 +1,13 @@
 <?php
 
-namespace Subapp\Pack\Compactor\Transformer;
+namespace Subapp\Pack\Optimizer\Transformer;
 
-use Subapp\Pack\Compactor\Accessor\AccessorInterface;
-use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
+use Subapp\Pack\Optimizer\Accessor\AccessorInterface;
+use Subapp\Pack\Optimizer\Schema\Column\ColumnInterface;
 
 /**
  * Class UsualDataProcessor
- * @package Subapp\Pack\Compactor\Transformer
+ * @package Subapp\Pack\Optimizer\ValueCompactor
  */
 class UsualValueTransformer extends AbstractValueTransformer
 {

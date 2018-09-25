@@ -29,7 +29,7 @@ abstract class AbstractScalarType extends Type
     private function validateScalarValue($value)
     {
         if (!is_scalar($value) && $value !== null) {
-            throw new \InvalidArgumentException(sprintf('Type handler %s expect only scalar value types and NULL', static::class));
+            throw new \InvalidArgumentException(sprintf('Type handler (%s) expect only scalar and NULL value types', static::class));
         }
     }
     
