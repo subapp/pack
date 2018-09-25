@@ -24,7 +24,7 @@ class BitMaskKeeperValueCompactor extends AbstractColumnsKeeperValueCompactor
         
         if ($column instanceof BitMaskColumn) {
             foreach ($column->getColumns() as $inner) {
-                $value = ($value | ((1 * $this->getConvertedValue($inner, $input)) << $count++));
+                $value = ($value | ((1 * $this->collapseValue($inner, $input)) << $count++));
             }
         }
         

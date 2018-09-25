@@ -17,7 +17,7 @@ class UsualValueCompactor extends AbstractValueCompactor
      */
     public function collapse(ColumnInterface $column, AccessorInterface $input, AccessorInterface $output)
     {
-        $output->setValue($column->getName(), $this->getConvertedValue($column, $input));
+        $output->setValue($column->getName(), $this->collapseValue($column, $input));
     }
     
     /**
@@ -25,7 +25,7 @@ class UsualValueCompactor extends AbstractValueCompactor
      */
     public function expand(ColumnInterface $column, AccessorInterface $input, AccessorInterface $output)
     {
-        $output->setValue($column->getColumnName(), $this->getUnconvertedValue($column, $input));
+        $output->setValue($column->getColumnName(), $this->expandValue($column, $input));
     }
     
 }

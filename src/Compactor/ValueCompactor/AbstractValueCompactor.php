@@ -3,6 +3,7 @@
 namespace Subapp\Pack\Compactor\ValueCompactor;
 
 use Subapp\Pack\Compactor\Accessor\AccessorInterface;
+use Subapp\Pack\Compactor\Hydrator\HydratorInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 
 /**
@@ -13,11 +14,33 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
 {
 
     /**
+     * @var HydratorInterface
+     */
+    protected $hydrator;
+
+    /**
+     * AbstractValueCompactor constructor.
+     * @param HydratorInterface $hydrator
+     */
+    public function __construct(HydratorInterface $hydrator)
+    {
+        $this->hydrator = $hydrator;
+    }
+
+    /**
+     * @return HydratorInterface
+     */
+    public function getHydrator()
+    {
+        return $this->hydrator;
+    }
+
+    /**
      * @param ColumnInterface   $column
      * @param AccessorInterface $accessor
      * @return mixed
      */
-    public function getConvertedValue(ColumnInterface $column, AccessorInterface $accessor)
+    public function collapseValue(ColumnInterface $column, AccessorInterface $accessor)
     {
         $value = $accessor->getValue($column->getColumnName());
 
@@ -29,7 +52,7 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
      * @param AccessorInterface $accessor
      * @return mixed
      */
-    public function getUnconvertedValue(ColumnInterface $column, AccessorInterface $accessor)
+    public function expandValue(ColumnInterface $column, AccessorInterface $accessor)
     {
         $value = $accessor->getValue($column->getName());
         

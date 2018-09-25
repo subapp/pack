@@ -2,13 +2,14 @@
 
 namespace Subapp\Pack\Compactor\Factory;
 
+use Subapp\Pack\Compactor\Hydrator\HydratorInterface;
 use Subapp\Pack\Compactor\ValueCompactor\BitMaskKeeperValueCompactor;
 use Subapp\Pack\Compactor\ValueCompactor\CombinedKeeperValueCompactor;
 use Subapp\Pack\Compactor\ValueCompactor\UsualValueCompactor;
 use Subapp\Pack\Compactor\ValueCompactor\ValueCompactorInterface;
 use Subapp\Pack\Compactor\Schema\Column\BitMaskColumn;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
-use Subapp\Pack\Compactor\Schema\Column\CombinedColumn;
+use Subapp\Pack\Compactor\Schema\Column\ValueListColumn;
 
 /**
  * Class ValueCompactorFactory
@@ -20,21 +21,35 @@ class ValueCompactorFactory
     /**
      * @var array
      */
-    private $shared = [];
-    
+    private $compactors = [];
+
+    /**
+     * @var HydratorInterface
+     */
+    protected $hydrator;
+
+    /**
+     * AbstractValueCompactor constructor.
+     * @param HydratorInterface $hydrator
+     */
+    public function __construct(HydratorInterface $hydrator)
+    {
+        $this->hydrator = $hydrator;
+    }
+
     /**
      * @param $column
      * @return ValueCompactorInterface
      */
-    public function getTransformer(ColumnInterface $column)
+    public function createValueCompactor(ColumnInterface $column)
     {
         switch (true) {
             case ($column instanceof BitMaskColumn):
-                return new BitMaskKeeperValueCompactor();
-            case ($column instanceof CombinedColumn):
-                return new CombinedKeeperValueCompactor();
+                return new BitMaskKeeperValueCompactor($this->hydrator);
+            case ($column instanceof ValueListColumn):
+                return new CombinedKeeperValueCompactor($this->hydrator);
             default:
-                return new UsualValueCompactor();
+                return new UsualValueCompactor($this->hydrator);
         }
     }
     
@@ -42,15 +57,15 @@ class ValueCompactorFactory
      * @param ColumnInterface $column
      * @return ValueCompactorInterface
      */
-    public function getSharedTransformer(ColumnInterface $column)
+    public function getValueCompactor(ColumnInterface $column)
     {
         $name = $column->getName();
         
-        if (!isset($this->shared[$name])) {
-            $this->shared[$name] = $this->getTransformer($column);
+        if (!isset($this->compactors[$name])) {
+            $this->compactors[$name] = $this->createValueCompactor($column);
         }
         
-        return $this->shared[$name];
+        return $this->compactors[$name];
     }
     
 }

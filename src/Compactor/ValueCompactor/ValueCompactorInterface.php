@@ -3,6 +3,7 @@
 namespace Subapp\Pack\Compactor\ValueCompactor;
 
 use Subapp\Pack\Compactor\Accessor\AccessorInterface;
+use Subapp\Pack\Compactor\Hydrator\HydratorInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 
 /**
@@ -11,6 +12,11 @@ use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
  */
 interface ValueCompactorInterface
 {
+
+    /**
+     * @return HydratorInterface
+     */
+    public function getHydrator();
     
     /**
      * @param ColumnInterface   $column

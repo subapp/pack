@@ -3,14 +3,14 @@
 namespace Subapp\Pack\Compactor\Schema\Type;
 
 /**
- * Class SimpleArrayType
+ * Class ArrayListType
  *
  * @package Subapp\Pack\Compactor\Schema\Type
  */
-class SimpleArrayType extends Type
+class ArrayListType extends Type
 {
-    
-    const DEFAULT_SEPARATOR = ':';
+
+    const DEFAULT_SEPARATOR = ';';
     
     /**
      * @inheritDoc
@@ -26,12 +26,18 @@ class SimpleArrayType extends Type
     public function getSeparator()
     {
         $extra = $this->getExtra();
-        
-        if (isset($extra['separator'])) {
-            return $extra['separator'];
-        }
-        
-        return self::DEFAULT_SEPARATOR;
+
+        return $extra['separator'] ?? self::DEFAULT_SEPARATOR;
+    }
+
+    /**
+     * @param string $separator
+     */
+    public function setSeparator($separator)
+    {
+        $extra = $this->getExtra();
+        $extra['separator'] = $separator;
+        $this->setExtra($extra);
     }
     
     /**

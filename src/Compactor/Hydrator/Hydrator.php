@@ -32,7 +32,7 @@ class Hydrator implements HydratorInterface
     public function __construct(SchemaInterface $schema)
     {
         $this->schema = $schema;
-        $this->factory = new ValueCompactorFactory();
+        $this->factory = new ValueCompactorFactory($this);
     }
     
     
@@ -48,7 +48,7 @@ class Hydrator implements HydratorInterface
         $columns = $this->getSchema()->getColumns();
     
         foreach ($columns as $column) {
-            $processor = $factory->getSharedTransformer($column);
+            $processor = $factory->getValueCompactor($column);
             $processor->expand($column, $input, $output);
         }
         
@@ -67,7 +67,7 @@ class Hydrator implements HydratorInterface
         $columns = $this->getSchema()->getColumns();
     
         foreach ($columns as $column) {
-            $processor = $factory->getSharedTransformer($column);
+            $processor = $factory->getValueCompactor($column);
             $processor->collapse($column, $input, $output);
         }
         

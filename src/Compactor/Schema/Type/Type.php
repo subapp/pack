@@ -56,7 +56,7 @@ abstract class Type
         self::TIMESTAMP  => TimestampType::class,
         self::ENUM       => EnumType::class,
         self::DATA_ARRAY => ArrayType::class,
-        self::ARRAY_LIST => SimpleArrayType::class,
+        self::ARRAY_LIST => ArrayListType::class,
         self::OBJECT     => ObjectType::class,
         self::JSON       => JsonType::class,
         self::DATETIME   => DatetimeType::class,

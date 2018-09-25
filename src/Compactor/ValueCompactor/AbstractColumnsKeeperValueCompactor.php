@@ -11,7 +11,7 @@ use Subapp\Pack\Compactor\Schema\Column\ColumnsKeeperInterface;
  * Class AbstractColumnsKeeperValueCompacter
  * @package Subapp\Pack\Compactor\ValueCompactor
  */
-abstract class AbstractColumnsKeeperValueCompactor extends AbstractValueCompactor
+abstract class AbstractColumnsKeeperValueCompactor extends UsualValueCompactor
 {
     
     /**
@@ -38,12 +38,12 @@ abstract class AbstractColumnsKeeperValueCompactor extends AbstractValueCompacto
             $accessor = $this->getArrayAccessor($column, $input);
             
             foreach ($column->getColumns() as $inner) {
-                // @todo this->expand() ?
-                $value = $this->getUnconvertedValue($inner, $accessor);
-                $output->setValue($inner->getColumnName(), $value);
+                $this->expand($inner, $accessor, $output);
             }
             
             unset($accessor);
+        } else {
+            parent::expand($column, $input, $output);
         }
     }
     

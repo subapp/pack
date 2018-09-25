@@ -8,7 +8,7 @@ use Subapp\Pack\Compactor\Schema\Type\Type;
  * Class CombinedColumn
  * @package Subapp\Pack\Compactor\Schema\Column
  */
-class CombinedColumn extends AbstractColumnLength implements ColumnsKeeperInterface
+class ValueListColumn extends AbstractColumnLength implements ColumnsKeeperInterface
 {
     
     /**
