@@ -4,7 +4,7 @@ namespace Subapp\Pack\Compactor\Factory;
 
 use Subapp\Pack\Compactor\Hydrator\HydratorInterface;
 use Subapp\Pack\Compactor\ValueCompactor\BitMaskKeeperValueCompactor;
-use Subapp\Pack\Compactor\ValueCompactor\CombinedKeeperValueCompactor;
+use Subapp\Pack\Compactor\ValueCompactor\ColumnKeeperValueCompactor;
 use Subapp\Pack\Compactor\ValueCompactor\UsualValueCompactor;
 use Subapp\Pack\Compactor\ValueCompactor\ValueCompactorInterface;
 use Subapp\Pack\Compactor\Schema\Column\BitMaskColumn;
@@ -44,10 +44,9 @@ class ValueCompactorFactory
     public function createValueCompactor(ColumnInterface $column)
     {
         switch (true) {
-            case ($column instanceof BitMaskColumn):
-                return new BitMaskKeeperValueCompactor($this->hydrator);
             case ($column instanceof ValueListColumn):
-                return new CombinedKeeperValueCompactor($this->hydrator);
+            case ($column instanceof BitMaskColumn):
+                return new ColumnKeeperValueCompactor($this->hydrator);
             default:
                 return new UsualValueCompactor($this->hydrator);
         }

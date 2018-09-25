@@ -15,10 +15,4 @@ interface TypeMappingInterface
      */
     public function getPackFormat($type);
     
-    /**
-     * @param string $typeName
-     * @return boolean
-     */
-    public function isStringType($typeName);
-    
 }

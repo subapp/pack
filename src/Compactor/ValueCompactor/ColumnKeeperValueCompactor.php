@@ -8,27 +8,30 @@ use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnsKeeperInterface;
 
 /**
- * Class AbstractColumnsKeeperValueCompacter
+ * Class ColumnKeeperValueCompactor
  * @package Subapp\Pack\Compactor\ValueCompactor
  */
-abstract class AbstractColumnsKeeperValueCompactor extends UsualValueCompactor
+class ColumnKeeperValueCompactor extends UsualValueCompactor
 {
-    
+
     /**
-     * @param ColumnsKeeperInterface $column
-     * @return array
+     * @inheritDoc
      */
-    protected function getInnerKeys(ColumnsKeeperInterface $column)
+    public function collapse(ColumnInterface $column, AccessorInterface $input, AccessorInterface $output)
     {
-        $keys = [];
-        
-        foreach ($column->getColumns() as $inner) {
-            $keys[] = $inner->getName();
+        if ($column instanceof ColumnsKeeperInterface) {
+            $values = [];
+
+            foreach ($column->getColumns() as $inner) {
+                $values[] = $this->collapseValue($inner, $input);
+            }
+
+            $output->setValue($column->getName(), $this->toPlatformValue($values, $column));
+        } else {
+            parent::collapse($column, $input, $output);
         }
-        
-        return $keys;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -68,6 +71,24 @@ abstract class AbstractColumnsKeeperValueCompactor extends UsualValueCompactor
      * @param AccessorInterface $input
      * @return array
      */
-    abstract protected function getInnerValues(ColumnInterface $column, AccessorInterface $input);
+    protected function getInnerValues(ColumnInterface $column, AccessorInterface $input)
+    {
+        return $this->expandValue($column, $input);
+    }
+
+    /**
+     * @param ColumnsKeeperInterface $column
+     * @return array
+     */
+    protected function getInnerKeys(ColumnsKeeperInterface $column)
+    {
+        $keys = [];
+
+        foreach ($column->getColumns() as $inner) {
+            $keys[] = $inner->getName();
+        }
+
+        return $keys;
+    }
     
 }

@@ -74,7 +74,7 @@ final class PackFormatBuilder
         $mapping = $this->getMapping();
         $format = $mapping->getPackFormat($column->getTypeName());
 
-        if ($mapping->isStringType($column->getTypeName())) {
+        if ($column->getType()->isString()) {
             $length = $column->getLength();
             $format = sprintf('%s%s', $format, $length ? $length : '*');
         }

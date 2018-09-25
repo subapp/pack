@@ -16,8 +16,6 @@ abstract class AbstractScalarType extends Type
      */
     public function toPhpValue($value)
     {
-        $this->validateScalarValue($value);
-        
         return $value;
     }
     

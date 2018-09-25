@@ -38,13 +38,4 @@ class TypeMapping implements TypeMappingInterface
         return $this->map[$type] ?? null;
     }
     
-    /**
-     * @param string $typeName
-     * @return boolean
-     */
-    public function isStringType($typeName)
-    {
-        return in_array($typeName, [Type::DATETIME, Type::STRING, Type::CHAR, Type::JSON,], true);
-    }
-    
 }

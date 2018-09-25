@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Schema\Column;
 
+use Subapp\Pack\Compactor\Schema\Type\ArrayListType;
 use Subapp\Pack\Compactor\Schema\Type\Type;
 
 /**
@@ -51,13 +52,26 @@ class ValueListColumn extends AbstractColumnLength implements ColumnsKeeperInter
     {
         return $this->separator;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
+    public function retrieveType()
+    {
+        /** @var ArrayListType $columnType */
+        $columnType = parent::retrieveType();
+
+        $columnType->setSeparator('::');
+
+        return $columnType;
+    }
+
     /**
      * @inheritDoc
      */
     public function getTypeName()
     {
-        return Type::STRING;
+        return Type::ARRAY_LIST;
     }
     
 }

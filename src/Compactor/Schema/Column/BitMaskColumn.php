@@ -2,6 +2,8 @@
 
 namespace Subapp\Pack\Compactor\Schema\Column;
 
+use Subapp\Pack\Compactor\Schema\Type\Type;
+
 /**
  * Class BitMaskValue
  * @package Subapp\Pack\Compactor\Schema\Column
@@ -34,6 +36,14 @@ class BitMaskColumn extends IntegerColumn implements ColumnsKeeperInterface
         });
 
         return $this->columns;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTypeName()
+    {
+        return Type::BOOLEAN_LIST;
     }
 
 }

@@ -9,60 +9,69 @@ namespace Subapp\Pack\Compactor\Schema\Type;
 abstract class Type
 {
     
-    const TINYINT    = 'tiny_integer';
-    const SMALLINT   = 'small_integer';
-    const INTEGER    = 'integer';
-    const BIGINT     = 'big_integer';
-    const CHAR       = 'char';
-    const STRING     = 'string';
-    const TEXT       = 'text';
-    const NUMERIC    = 'numeric';
-    const DECIMAL    = 'decimal';
-    const BOOLEAN    = 'boolean';
-    const FLOAT      = 'float';
-    const DOUBLE     = 'double';
-    const BINARY     = 'binary';
-    const RESOURCE   = 'resource';
-    const BLOB       = 'blob';
-    const DATE       = 'date';
-    const TIME       = 'time';
-    const TIMESTAMP  = 'timestamp';
-    const ENUM       = 'enum';
-    const ARRAY_LIST = 'list';
-    const DATA_ARRAY = 'array';
-    const OBJECT     = 'object';
-    const JSON       = 'json';
-    const DATETIME   = 'datetime';
-    const UUID       = 'uuid';
-    
+    const TINYINT       = 'tiny_integer';
+    const SMALLINT      = 'small_integer';
+    const INTEGER       = 'integer';
+    const BIGINT        = 'big_integer';
+    const CHAR          = 'char';
+    const STRING        = 'string';
+    const TEXT          = 'text';
+    const NUMERIC       = 'numeric';
+    const DECIMAL       = 'decimal';
+    const BOOLEAN       = 'boolean';
+    const FLOAT         = 'float';
+    const DOUBLE        = 'double';
+    const BINARY        = 'binary';
+    const RESOURCE      = 'resource';
+    const BLOB          = 'blob';
+    const DATE          = 'date';
+    const TIME          = 'time';
+    const DATETIME      = 'datetime';
+    const TIMESTAMP     = 'timestamp';
+    const ENUM          = 'enum';
+    const ARRAY_LIST    = 'list';
+    const BOOLEAN_LIST  = 'boolean_list';
+    const DATA_ARRAY    = 'array';
+    const OBJECT        = 'object';
+    const JSON          = 'json';
+    const UUID          = 'uuid';
+
+    const PHP_TYPE_BOOLEAN      = 'boolean';
+    const PHP_TYPE_INT          = 'integer';
+    const PHP_TYPE_DOUBLE       = 'double';
+    const PHP_TYPE_FLOAT        = 'float';
+    const PHP_TYPE_RESOURCE     = 'resource';
+    const PHP_TYPE_STRING       = 'string';
+
     protected static $typesMap = [
-        self::TINYINT    => IntegerType::class,
-        self::SMALLINT   => IntegerType::class,
-        self::INTEGER    => IntegerType::class,
-        self::BIGINT     => IntegerType::class,
-        self::CHAR       => StringType::class,
-        self::STRING     => StringType::class,
-        self::TEXT       => StringType::class,
-        self::NUMERIC    => IntegerType::class,
-        self::DECIMAL    => DoubleType::class,
-        self::BOOLEAN    => BooleanType::class,
-        self::FLOAT      => FloatType::class,
-        self::DOUBLE     => DoubleType::class,
-        self::BINARY     => ResourceType::class,
-        self::BLOB       => ResourceType::class,
-        self::RESOURCE   => ResourceStringType::class,
-        self::DATE       => DatetimeType::class,
-        self::TIME       => DatetimeType::class,
-        self::TIMESTAMP  => TimestampType::class,
-        self::ENUM       => EnumType::class,
-        self::DATA_ARRAY => ArrayType::class,
-        self::ARRAY_LIST => ArrayListType::class,
-        self::OBJECT     => ObjectType::class,
-        self::JSON       => JsonType::class,
-        self::DATETIME   => DatetimeType::class,
-        self::UUID       => StringType::class,
+        self::TINYINT       => IntegerType::class,
+        self::SMALLINT      => IntegerType::class,
+        self::INTEGER       => IntegerType::class,
+        self::BIGINT        => IntegerType::class,
+        self::CHAR          => StringType::class,
+        self::STRING        => StringType::class,
+        self::TEXT          => StringType::class,
+        self::NUMERIC       => IntegerType::class,
+        self::DECIMAL       => DoubleType::class,
+        self::BOOLEAN       => BooleanType::class,
+        self::FLOAT         => FloatType::class,
+        self::DOUBLE        => DoubleType::class,
+        self::BINARY        => ResourceType::class,
+        self::BLOB          => ResourceType::class,
+        self::RESOURCE      => ResourceStringType::class,
+        self::DATE          => DateType::class,
+        self::TIME          => TimeType::class,
+        self::DATETIME      => DatetimeType::class,
+        self::TIMESTAMP     => TimestampType::class,
+        self::ENUM          => EnumType::class,
+        self::DATA_ARRAY    => ArrayType::class,
+        self::ARRAY_LIST    => ArrayListType::class,
+        self::BOOLEAN_LIST  => BooleanListType::class,
+        self::OBJECT        => ObjectType::class,
+        self::JSON          => JsonType::class,
+        self::UUID          => StringType::class,
     ];
-    
+
     protected static $phpNamesMap = [
         self::TINYINT    => 'boolean',
         self::SMALLINT   => 'integer',
@@ -80,7 +89,7 @@ abstract class Type
         self::BLOB       => 'resource',
         self::RESOURCE   => 'resource',
         self::DATE       => 'string',
-        self::TIME       => 'integer',
+        self::TIME       => 'string',
         self::TIMESTAMP  => 'integer',
         self::ENUM       => 'string',
         self::DATA_ARRAY => 'array',
@@ -105,14 +114,6 @@ abstract class Type
      * @var null
      */
     protected $extra = null;
-    
-    /**
-     * Type constructor.
-     */
-    public function __construct()
-    {
-    
-    }
     
     /**
      * @param array $parameters
@@ -187,6 +188,54 @@ abstract class Type
         }
         
         static::$typesMap[$name] = $class;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isString()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_STRING;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isInt()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_INT;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDouble()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_DOUBLE;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isFloat()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_FLOAT;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isResource()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_RESOURCE;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isBoolean()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_BOOLEAN;
     }
     
     /**
