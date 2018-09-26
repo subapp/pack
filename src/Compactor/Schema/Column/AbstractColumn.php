@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Schema\Column;
 
+use Subapp\Pack\Compactor\Schema\Type\NullProxyType;
 use Subapp\Pack\Compactor\Schema\Type\Type;
 
 /**
@@ -79,6 +80,16 @@ abstract class AbstractColumn implements ColumnInterface
     public function getLength()
     {
         return $this->length;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function nullIf($value)
+    {
+        $nullIf = new NullProxyType($this->getType());
+        $nullIf->setNullIf($value);
+        $this->setType($nullIf);
     }
     
     /**

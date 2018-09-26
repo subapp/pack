@@ -30,6 +30,11 @@ interface ColumnInterface
      * @return Type
      */
     public function getType();
+    
+    /**
+     * @param mixed $value
+     */
+    public function nullIf($value);
 
     /**
      * @param Type $type

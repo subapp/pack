@@ -9,6 +9,9 @@ namespace Subapp\Pack\Compactor\Schema\Type;
 class BooleanListType extends IntegerType
 {
 
+    const INT32 = 32;
+    const INT64 = 64;
+    
     /**
      * @inheritDoc
      */
@@ -16,7 +19,7 @@ class BooleanListType extends IntegerType
     {
         $values = [];
 
-        foreach (range(0, log($int, 2)) as $index) {
+        foreach (range(0, $this->getBitCount() - 1) as $index) {
             $values[$index] = (boolean)($int & (1 << $index));
         }
 
@@ -43,6 +46,26 @@ class BooleanListType extends IntegerType
     public function getName()
     {
         return static::INTEGER;
+    }
+    
+    /**
+     * @param $bitCount
+     */
+    public function setBitCount($bitCount)
+    {
+        $extra = $this->getExtra();
+        $extra['bitCount'] = (int)min($bitCount, self::INT32);
+        $this->setExtra($extra);
+    }
+    
+    /**
+     * @return int
+     */
+    public function getBitCount()
+    {
+        $extra = $this->getExtra();
+
+        return $extra['bitCount'] ?? self::INT32;
     }
 
 }

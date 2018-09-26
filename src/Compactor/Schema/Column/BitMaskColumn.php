@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Schema\Column;
 
+use Subapp\Pack\Compactor\Schema\Type\BooleanListType;
 use Subapp\Pack\Compactor\Schema\Type\Type;
 
 /**
@@ -24,6 +25,7 @@ class BitMaskColumn extends IntegerColumn implements ColumnsKeeperInterface
         parent::__construct($name, null, $length, $position);
 
         $this->columns = $columns;
+        $this->setBitCount(count($columns));
     }
 
     /**
@@ -36,6 +38,16 @@ class BitMaskColumn extends IntegerColumn implements ColumnsKeeperInterface
         });
 
         return $this->columns;
+    }
+    
+    /**
+     * @param $bitCount
+     */
+    public function setBitCount($bitCount)
+    {
+        /** @var BooleanListType $columnType */
+        $columnType = $this->getType();
+        $columnType->setBitCount($bitCount);
     }
 
     /**

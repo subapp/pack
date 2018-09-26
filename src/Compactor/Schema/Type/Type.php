@@ -9,6 +9,7 @@ namespace Subapp\Pack\Compactor\Schema\Type;
 abstract class Type
 {
     
+    const NULL          = 'null';
     const TINYINT       = 'tiny_integer';
     const SMALLINT      = 'small_integer';
     const INTEGER       = 'integer';
@@ -37,11 +38,14 @@ abstract class Type
     const UUID          = 'uuid';
 
     const PHP_TYPE_BOOLEAN      = 'boolean';
+    const PHP_TYPE_NULL         = 'null';
     const PHP_TYPE_INT          = 'integer';
     const PHP_TYPE_DOUBLE       = 'double';
     const PHP_TYPE_FLOAT        = 'float';
     const PHP_TYPE_RESOURCE     = 'resource';
     const PHP_TYPE_STRING       = 'string';
+    const PHP_TYPE_OBJECT       = 'object';
+    const PHP_TYPE_ARRAY        = 'array';
 
     protected static $typesMap = [
         self::TINYINT       => IntegerType::class,
@@ -70,35 +74,37 @@ abstract class Type
         self::OBJECT        => ObjectType::class,
         self::JSON          => JsonType::class,
         self::UUID          => StringType::class,
+        self::NULL          => NullProxyType::class,
     ];
 
     protected static $phpNamesMap = [
-        self::TINYINT       => 'boolean',
-        self::SMALLINT      => 'integer',
-        self::INTEGER       => 'integer',
-        self::BIGINT        => 'integer',
-        self::CHAR          => 'string',
-        self::STRING        => 'string',
-        self::TEXT          => 'string',
-        self::NUMERIC       => 'integer',
-        self::DECIMAL       => 'double',
-        self::BOOLEAN       => 'boolean',
-        self::FLOAT         => 'float',
-        self::DOUBLE        => 'double',
-        self::BINARY        => 'resource',
-        self::BLOB          => 'resource',
-        self::RESOURCE      => 'resource',
-        self::DATE          => 'string',
-        self::TIME          => 'string',
-        self::TIMESTAMP     => 'integer',
-        self::ENUM          => 'string',
-        self::DATA_ARRAY    => 'array',
-        self::ARRAY_LIST    => 'array',
-        self::BOOLEAN_LIST  => 'integer',
-        self::OBJECT        => 'object',
-        self::JSON          => 'string',
-        self::DATETIME      => 'string',
-        self::UUID          => 'string',
+        self::NULL          => self::PHP_TYPE_NULL,
+        self::TINYINT       => self::PHP_TYPE_BOOLEAN,
+        self::SMALLINT      => self::PHP_TYPE_INT,
+        self::INTEGER       => self::PHP_TYPE_INT,
+        self::BIGINT        => self::PHP_TYPE_INT,
+        self::CHAR          => self::PHP_TYPE_STRING,
+        self::STRING        => self::PHP_TYPE_STRING,
+        self::TEXT          => self::PHP_TYPE_STRING,
+        self::NUMERIC       => self::PHP_TYPE_INT,
+        self::DECIMAL       => self::PHP_TYPE_DOUBLE,
+        self::BOOLEAN       => self::PHP_TYPE_BOOLEAN,
+        self::FLOAT         => self::PHP_TYPE_FLOAT,
+        self::DOUBLE        => self::PHP_TYPE_DOUBLE,
+        self::BINARY        => self::PHP_TYPE_RESOURCE,
+        self::BLOB          => self::PHP_TYPE_RESOURCE,
+        self::RESOURCE      => self::PHP_TYPE_RESOURCE,
+        self::DATE          => self::PHP_TYPE_STRING,
+        self::TIME          => self::PHP_TYPE_STRING,
+        self::TIMESTAMP     => self::PHP_TYPE_INT,
+        self::ENUM          => self::PHP_TYPE_STRING,
+        self::DATA_ARRAY    => self::PHP_TYPE_ARRAY,
+        self::ARRAY_LIST    => self::PHP_TYPE_ARRAY,
+        self::BOOLEAN_LIST  => self::PHP_TYPE_INT,
+        self::OBJECT        => self::PHP_TYPE_OBJECT,
+        self::JSON          => self::PHP_TYPE_STRING,
+        self::DATETIME      => self::PHP_TYPE_STRING,
+        self::UUID          => self::PHP_TYPE_STRING,
     ];
     
     /**
