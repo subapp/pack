@@ -24,11 +24,11 @@ class SchemaBuilderVersion10001 extends AbstractSchemaBuilder
      */
     protected function doBuildSchema(SchemaInterface $schema)
     {
-        $schema->addColumn(new IntegerColumn('id', 'userId', IntegerColumn::INT32, 100));
+        $schema->addColumn(new IntegerColumn('id', 'userId', IntegerColumn::INT_32, 100));
         $schema->addColumn(new TimestampColumn('created', 'created', 10));
         $schema->addColumn(new TimestampColumn('updated', 'updated', 20));
     
-        $schema->addColumn(new BitMaskColumn('access', BitMaskColumn::INT16, 110,
+        $schema->addColumn(new BitMaskColumn('access', BitMaskColumn::INT_16, 110,
             new BooleanColumn('b1', 'boolean1', 0),
             new BooleanColumn('b2', 'boolean2', 1),
             new BooleanColumn('b3', 'boolean3', 2),

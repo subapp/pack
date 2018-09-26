@@ -16,7 +16,7 @@ class TypeMapping implements TypeMappingInterface
      */
     private $map = [
         Type::BIGINT => 'L',
-        Type::INTEGER => 'I',
+        Type::INTEGER => 'i',
         Type::TIMESTAMP => 'I',
         Type::BOOLEAN_LIST => 'I',
         Type::SMALLINT => 'S',
@@ -27,6 +27,7 @@ class TypeMapping implements TypeMappingInterface
         Type::FLOAT => 'f',
         Type::STRING => 'a',
         Type::JSON => 'a',
+        Type::ARRAY_LIST => 'a',
         Type::DATETIME => 'a',
     ];
     

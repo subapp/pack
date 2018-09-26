@@ -52,9 +52,20 @@ class Packer implements PackerInterface
         $pattern = $this->builder->getUnpackFormat();
         
         $unpacked = $this->pack->unpack($pattern, $value);
-        $unpacked = array_map('trim', $unpacked);
-        
+        $unpacked = $this->removeNullBytes($unpacked);
+
         $values->batch($unpacked);
+    }
+    
+    /**
+     * @param array $values
+     * @return array
+     */
+    private function removeNullBytes(array $values)
+    {
+        return array_map(function ($value) {
+            return is_string($value) ? trim($value) : $value;
+        }, $values);
     }
     
 }

@@ -11,19 +11,23 @@ use Subapp\Pack\Compactor\Schema\Type\Type;
 class IntegerColumn extends AbstractColumnLength
 {
 
-    const INT8 = 1;
-    const INT16 = 2;
-    const INT32 = 4;
-    const INT64 = 8;
+    const INT_8         = 1;
+    const INT_16        = 2;
+    const INT_32        = 4;
+    const INT_64        = 8;
+    const U_INT_8       = 16;
+    const U_INT_16      = 32;
+    const U_INT_32      = 64;
+    const U_INT_64      = 128;
     
     /**
      * @var array
      */
     private $map = [
-        self::INT8 => Type::TINYINT,
-        self::INT16 => Type::SMALLINT,
-        self::INT32 => Type::INTEGER,
-        self::INT64 => Type::BIGINT,
+        self::INT_8 => Type::TINYINT,
+        self::INT_16 => Type::SMALLINT,
+        self::INT_32 => Type::INTEGER,
+        self::INT_64 => Type::BIGINT,
     ];
     
     /**

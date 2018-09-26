@@ -24,6 +24,22 @@ class NullProxyType extends Type
     
     /**
      * @inheritDoc
+     * @throws \BadMethodCallException
+     */
+    public function __call($name, $arguments)
+    {
+        $type = $this->getType();
+
+        if (false === method_exists($type, $name)) {
+            throw new \BadMethodCallException(sprintf('Unable to call method %s::%s(); for inner type',
+                get_class($type), $name));
+        }
+        
+        return call_user_func([$type, $name], ...$arguments);
+    }
+    
+    /**
+     * @inheritDoc
      */
     public function getName()
     {

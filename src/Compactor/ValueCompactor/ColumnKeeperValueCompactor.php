@@ -60,18 +60,37 @@ class ColumnKeeperValueCompactor extends UsualValueCompactor
         $collection = [];
         
         if ($column instanceof ColumnsKeeperInterface) {
-            $collection = array_combine($this->getInnerKeys($column), $this->getInnerValues($column, $input));
+            $collection = array_combine(...$this->getValuesKeysPairs($column, $input));
         }
         
         return new ArrayAccessor($collection);
     }
     
     /**
-     * @param ColumnInterface   $column
+     * @param ColumnsKeeperInterface $column
+     * @param AccessorInterface      $input
+     * @return array
+     * @throws \UnexpectedValueException
+     */
+    protected function getValuesKeysPairs(ColumnsKeeperInterface $column, AccessorInterface $input)
+    {
+        $values = $this->getInnerValues($column, $input);
+        $keys = $this->getInnerKeys($column);
+        
+        if (($countValues = count($values)) !== ($countKeys = count($keys))) {
+            throw new \UnexpectedValueException(sprintf('Unexpected count of pairs for keys (%d) and values (%s). Expected: (%s)',
+                $countKeys, $countValues, implode(', ', $keys)));
+        }
+        
+        return [$keys, $values];
+    }
+    
+    /**
+     * @param ColumnsKeeperInterface   $column
      * @param AccessorInterface $input
      * @return array
      */
-    protected function getInnerValues(ColumnInterface $column, AccessorInterface $input)
+    protected function getInnerValues(ColumnsKeeperInterface $column, AccessorInterface $input)
     {
         return $this->expandValue($column, $input);
     }

@@ -15,26 +15,26 @@ use Subapp\Pack\Compactor\Schema\Column\TimestampColumn;
 use Subapp\Pack\Compactor\Schema\Column\ValueListColumn;
 use Subapp\Pack\Compactor\Schema\SchemaInterface;
 use Subapp\Pack\Compactor\Schema\Version;
-use Subapp\Pack\Tests\Mock\Setup\SetupVersion10001;
+use Subapp\Pack\Tests\Mock\Setup\SetupWithMinProcessors;
 
 /**
  * Class SchemaTest
  * @package Subapp\Pack\Tests
  */
-class AppBootstrapTest extends AbstractBoot
+class DataStructureTest extends AbstractBoot
 {
 
-    public function testBoot()
-    {
-        /** @var SetupVersion10001 $setup */
-        $setup = $this->getSetup();
-        $handler = $this->getHandler();
-        $schema = $this->getSchema();
-
-        $this->assertInstanceOf(SetupInterface::class, $setup);
-        $this->assertCount(15, $schema->getColumns());
-        $this->assertCount(3, $handler->getHandlers());
-    }
+//    public function testBoot()
+//    {
+//        /** @var SetupVersion10001 $setup */
+//        $setup = $this->getSetup();
+//        $handler = $this->getHandler();
+//        $schema = $this->getSchema();
+//
+//        $this->assertInstanceOf(SetupInterface::class, $setup);
+//        $this->assertCount(15, $schema->getColumns());
+//        $this->assertCount(3, $handler->getHandlers());
+//    }
 
     public function testVersionObject()
     {
@@ -76,14 +76,21 @@ class AppBootstrapTest extends AbstractBoot
             [DoubleColumn::class, 'd1', 'double1',],
             [DoubleColumn::class, 'd2', 'double2',],
             [IntegerColumn::class, 'id', 'userId',],
-            [BitMaskColumn::class, 'access', null,],
-            [StringColumn::class, 'userName', 'name',],
-            [IntegerColumn::class, 'int1', 'int1',],
-            [IntegerColumn::class, 'int2', 'int2',],
-            [IntegerColumn::class, 'int3', 'int3',],
-            [IntegerColumn::class, 'int4', 'int4',],
-            [JsonColumn::class, 'a1', 'array1',],
-            [JsonColumn::class, 'a2', 'array2',],
+            [BitMaskColumn::class, 'bm', null,],
+//            [StringColumn::class, 'un', 'name',],
+            [IntegerColumn::class, 'i1', 'int1',],
+            [IntegerColumn::class, 'i2', 'int2',],
+            [IntegerColumn::class, 'i3', 'int3',],
+            [IntegerColumn::class, 'i4', 'int4',],
+//            [JsonColumn::class, 'a1', 'array1',],
+//            [JsonColumn::class, 'a2', 'array2',],
+            [IntegerColumn::class, 'l1', 'lot_of_symbols_in_field_name1',],
+            [IntegerColumn::class, 'l2', 'lot_of_symbols_in_field_name2',],
+            [IntegerColumn::class, 'l3', 'lot_of_symbols_in_field_name3',],
+            [IntegerColumn::class, 'l4', 'lot_of_symbols_in_field_name4',],
+            [IntegerColumn::class, 'l5', 'lot_of_symbols_in_field_name5',],
+            [IntegerColumn::class, 'l6', 'lot_of_symbols_in_field_name6',],
+            [ValueListColumn::class, '_', null,],
         ];
 
         $data = [];

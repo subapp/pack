@@ -71,10 +71,11 @@ final class PackFormatBuilder
      */
     private function getNormalizedFormat(ColumnInterface $column)
     {
+        $type = $column->getType();
         $mapping = $this->getMapping();
         $format = $mapping->getPackFormat($column->getTypeName());
 
-        if ($column->getType()->isString()) {
+        if ($type->isString() || $type->isArray()) {
             $length = $column->getLength();
             $format = sprintf('%s%s', $format, $length ? $length : '*');
         }

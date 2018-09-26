@@ -196,7 +196,39 @@ abstract class Type
         
         static::$typesMap[$name] = $class;
     }
-
+    
+    /**
+     * @return boolean
+     */
+    public function isObject()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_OBJECT;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isArray()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_ARRAY;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isNull()
+    {
+        return $this->getPhpName() === static::PHP_TYPE_NULL;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isNumeric()
+    {
+        return ($this->isInt() || $this->isDouble() || $this->isFloat() || $this->isFloat());
+    }
+    
     /**
      * @return boolean
      */

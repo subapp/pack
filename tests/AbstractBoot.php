@@ -6,20 +6,27 @@ use PHPUnit\Framework\TestCase;
 use Subapp\Pack\Common\Setup\SetupInterface;
 use Subapp\Pack\Compactor\Schema\SchemaInterface;
 use Subapp\Pack\ProcessHandlerCollection;
-use Subapp\Pack\Tests\Mock\Setup\SetupVersion10001;
+use Subapp\Pack\Tests\Mock\Setup\SetupWithMinProcessors;
+use Subapp\Pack\Tests\Mock\Setup\SetupOptimal;
+use Subapp\Pack\Tests\Mock\Setup\SetupWithMaxProcessors;
 
 abstract class AbstractBoot extends TestCase
 {
 
     /**
-     * @var SetupInterface
+     * @var ProcessHandlerCollection
      */
-    protected $setup;
-
+    protected $handlerA;
+    
     /**
      * @var ProcessHandlerCollection
      */
-    protected $handler;
+    protected $handlerB;
+    
+    /**
+     * @var ProcessHandlerCollection
+     */
+    protected $handlerC;
 
     /**
      * @var SchemaInterface
@@ -33,35 +40,44 @@ abstract class AbstractBoot extends TestCase
     {
         parent::__construct($name, $data, $dataName);
 
-        $this->setup = $this->createSetupObject();
-        $this->handler = new ProcessHandlerCollection();
-        $this->schema = $this->setup->getSchema();
-
-        $this->setup->setup($this->handler);
-    }
-
-    /**
-     * @return SetupVersion10001
-     */
-    private function createSetupObject()
-    {
-        return new SetupVersion10001();
-    }
-
-    /**
-     * @return SetupInterface
-     */
-    public function getSetup()
-    {
-        return $this->setup;
+        $setupA = new SetupWithMinProcessors();
+        $setupB = new SetupOptimal();
+        $setupC = new SetupWithMaxProcessors();
+        
+        $this->schema = $setupA->getSchema();
+        
+        $this->handlerA = new ProcessHandlerCollection();
+        $this->handlerA->setup($setupA);
+        
+        $this->handlerB = new ProcessHandlerCollection();
+        $this->handlerB->setup($setupB);
+        
+        $this->handlerC = new ProcessHandlerCollection();
+        $this->handlerC->setup($setupC);
     }
 
     /**
      * @return ProcessHandlerCollection
      */
-    public function getHandler()
+    public function getHandlerA()
     {
-        return $this->handler;
+        return $this->handlerA;
+    }
+    
+    /**
+     * @return ProcessHandlerCollection
+     */
+    public function getHandlerB()
+    {
+        return $this->handlerB;
+    }
+    
+    /**
+     * @return ProcessHandlerCollection
+     */
+    public function getHandlerC()
+    {
+        return $this->handlerC;
     }
 
     /**

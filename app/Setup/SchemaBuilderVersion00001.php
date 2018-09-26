@@ -19,7 +19,7 @@ class SchemaBuilderVersion00001 extends AbstractSchemaBuilder
      */
     protected function doBuildSchema(SchemaInterface $schema)
     {
-        $schema->addColumn(new IntegerColumn('v', 'v', IntegerColumn::INT16, 100));
+        $schema->addColumn(new IntegerColumn('v', 'v', IntegerColumn::INT_16, 100));
         $schema->addColumn(new StringColumn('_', '_', null, 100));
     }
     
