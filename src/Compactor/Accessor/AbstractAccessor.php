@@ -39,4 +39,12 @@ abstract class AbstractAccessor implements AccessorInterface
         return $this->source;
     }
     
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return $this->countValues();
+    }
+    
 }

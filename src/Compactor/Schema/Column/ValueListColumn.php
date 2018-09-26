@@ -61,7 +61,7 @@ class ValueListColumn extends AbstractColumnLength implements ColumnsKeeperInter
         /** @var ArrayListType $columnType */
         $columnType = parent::retrieveType();
 
-        $columnType->setSeparator('::');
+        $columnType->setSeparator($this->getSeparator());
 
         return $columnType;
     }

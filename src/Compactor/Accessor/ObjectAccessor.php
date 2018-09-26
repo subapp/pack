@@ -42,7 +42,23 @@ class ObjectAccessor extends AbstractAccessor
     {
         $this->getAccessibleProperty($keyName)->setValue($this->source, $value);
     }
-
+    
+    /**
+     * @inheritDoc
+     */
+    public function hasValue($keyName)
+    {
+        return $this->reflection->hasProperty($keyName);
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function countValues()
+    {
+        return count($this->reflection->getProperties());
+    }
+    
     /**
      * @param $keyName
      * @return \ReflectionProperty

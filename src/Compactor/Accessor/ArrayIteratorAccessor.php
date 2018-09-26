@@ -27,4 +27,20 @@ class ArrayIteratorAccessor extends AbstractAccessor
         $this->source->offsetSet($keyName, $value);
     }
     
+    /**
+     * @inheritDoc
+     */
+    public function hasValue($keyName)
+    {
+        return $this->source->offsetExists($keyName);
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function countValues()
+    {
+        return $this->source->count();
+    }
+    
 }

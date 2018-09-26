@@ -6,7 +6,7 @@ namespace Subapp\Pack\Compactor\Accessor;
  * Interface AccessorInterface
  * @package Subapp\Pack\Compactor\Accessor
  */
-interface AccessorInterface
+interface AccessorInterface extends \Countable
 {
 
     /**
@@ -20,6 +20,17 @@ interface AccessorInterface
      * @param string|integer $value
      */
     public function setValue($keyName, $value);
+    
+    /**
+     * @param string $keyName
+     * @return boolean
+     */
+    public function hasValue($keyName);
+    
+    /**
+     * @return integer
+     */
+    public function countValues();
     
     /**
      * @var $source array|object

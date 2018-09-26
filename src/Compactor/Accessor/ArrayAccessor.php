@@ -26,5 +26,21 @@ class ArrayAccessor extends AbstractAccessor
     {
         $this->source[$keyName] = $value;
     }
-
+    
+    /**
+     * @inheritDoc
+     */
+    public function hasValue($keyName)
+    {
+        return isset($this->source[$keyName]);
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function countValues()
+    {
+        return count($this->source);
+    }
+    
 }

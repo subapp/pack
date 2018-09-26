@@ -46,10 +46,9 @@ class Hydrator implements HydratorInterface
     {
         $factory = $this->getFactory();
         $columns = $this->getSchema()->getColumns();
-    
+        
         foreach ($columns as $column) {
-            $processor = $factory->getValueCompactor($column);
-            $processor->expand($column, $input, $output);
+            $factory->getValueCompactor($column)->expand($column, $input, $output);
         }
         
         return $output->getSource();
@@ -65,10 +64,9 @@ class Hydrator implements HydratorInterface
     {
         $factory = $this->getFactory();
         $columns = $this->getSchema()->getColumns();
-    
+        
         foreach ($columns as $column) {
-            $processor = $factory->getValueCompactor($column);
-            $processor->collapse($column, $input, $output);
+            $factory->getValueCompactor($column)->collapse($column, $input, $output);
         }
         
         return $output->getSource();

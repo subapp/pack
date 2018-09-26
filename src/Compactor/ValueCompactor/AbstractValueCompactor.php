@@ -42,7 +42,7 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
      */
     public function collapseValue(ColumnInterface $column, AccessorInterface $accessor)
     {
-        $value = $accessor->getValue($column->getColumnName());
+        $value = $this->retrieveValue($column->getColumnName(), $accessor);
 
         return $this->toPlatformValue($value, $column);
     }
@@ -54,9 +54,24 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
      */
     public function expandValue(ColumnInterface $column, AccessorInterface $accessor)
     {
-        $value = $accessor->getValue($column->getName());
+        $value = $this->retrieveValue($column->getName(), $accessor);
         
         return $this->toPhpValue($value, $column);
+    }
+    
+    /**
+     * @param                   $key
+     * @param AccessorInterface $accessor
+     * @return int|string
+     * @throws \UnexpectedValueException
+     */
+    protected function retrieveValue($key, AccessorInterface $accessor)
+    {
+        if (false === $accessor->hasValue($key)) {
+            throw new \UnexpectedValueException(sprintf('Value for key (%s) does not exist in input accessor', $key));
+        }
+        
+        return $accessor->getValue($key);
     }
     
     /**
