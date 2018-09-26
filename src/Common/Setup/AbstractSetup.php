@@ -14,12 +14,13 @@ abstract class AbstractSetup implements SetupInterface
 
     /**
      * @param Version $version
+     * @param string $namespace
      * @return \Subapp\Pack\Compactor\Schema\SchemaInterface
      */
-    protected function loadSchema(Version $version)
+    protected function loadSchema(Version $version, $namespace)
     {
         $factory = new SchemaBuilderFactory();
-        $builder = $factory->getSchemaBuilder($version, 'Subapp\\TestApp\\Builder');
+        $builder = $factory->getSchemaBuilder($version, $namespace);
 
         return $builder->getSchema();
     }

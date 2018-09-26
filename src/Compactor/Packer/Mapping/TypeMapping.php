@@ -18,6 +18,7 @@ class TypeMapping implements TypeMappingInterface
         Type::BIGINT => 'L',
         Type::INTEGER => 'I',
         Type::TIMESTAMP => 'I',
+        Type::BOOLEAN_LIST => 'I',
         Type::SMALLINT => 'S',
         Type::TINYINT => 'C',
         Type::BOOLEAN => 'c',

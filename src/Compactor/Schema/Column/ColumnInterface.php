@@ -30,6 +30,12 @@ interface ColumnInterface
      * @return Type
      */
     public function getType();
+
+    /**
+     * @param Type $type
+     * @return mixed
+     */
+    public function setType(Type $type);
     
     /**
      * @return Type

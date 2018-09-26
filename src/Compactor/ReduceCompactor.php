@@ -26,12 +26,19 @@ class ReduceCompactor implements CompactorInterface
     private $accessor;
 
     /**
+     * @var string
+     */
+    private $class;
+
+    /**
      * ReduceCompactor constructor.
      * @param SchemaInterface $schema
+     * @param string|null $class
      */
-    public function __construct(SchemaInterface $schema)
+    public function __construct(SchemaInterface $schema, $class = null)
     {
         $this->hydrator = new Hydrator($schema);
+        $this->class = $class;
         $this->accessor = new AccessorFactory();
     }
 
@@ -54,7 +61,7 @@ class ReduceCompactor implements CompactorInterface
     public function extend($compacted)
     {
         $factory = $this->getAccessorFactory();
-        $collection = new Values();
+        $collection = $this->createOutputObject();
 
         $this->hydrator->hydrate($factory->getAccessor($compacted), $factory->getAccessor($collection));
 
@@ -75,6 +82,22 @@ class ReduceCompactor implements CompactorInterface
     public function getAccessorFactory()
     {
         return $this->accessor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * @return Values|object
+     */
+    private function createOutputObject()
+    {
+        return class_exists($class = $this->getClass()) ? new $class() : new Values();
     }
 
 }

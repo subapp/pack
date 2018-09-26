@@ -38,7 +38,16 @@ class ProcessHandlerCollection implements ProcessHandlerInterface
      */
     public function setup(SetupInterface $setup)
     {
+        $this->removeProcesses();
         $setup->setup($this);
+    }
+
+    /**
+     * @return void
+     */
+    public function removeProcesses()
+    {
+        $this->collection->clear();
     }
 
     /**

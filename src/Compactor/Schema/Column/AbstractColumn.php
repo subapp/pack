@@ -94,6 +94,14 @@ abstract class AbstractColumn implements ColumnInterface
         
         return $this->type;
     }
+
+    /**
+     * @param Type $type
+     */
+    public function setType(Type $type)
+    {
+        $this->type = $type;
+    }
     
     /**
      * @inheritDoc

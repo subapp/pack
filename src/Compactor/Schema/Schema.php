@@ -46,11 +46,9 @@ class Schema implements SchemaInterface
      */
     public function getColumns()
     {
-        $this->collection->sort(function (ColumnInterface $columnA, ColumnInterface $columnB) {
+        return $this->collection->sort(function (ColumnInterface $columnA, ColumnInterface $columnB) {
             return $columnA->getPosition() - $columnB->getPosition();
         });
-
-        return $this->collection;
     }
 
     /**
