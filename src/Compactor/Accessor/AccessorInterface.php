@@ -36,7 +36,12 @@ interface AccessorInterface extends \Countable
      * @var $source array|object
      */
     public function setSource($source);
-    
+
+    /**
+     * @return array
+     */
+    public function getKeys();
+
     /**
      * @return array|object
      */

@@ -2,8 +2,8 @@
 
 namespace Subapp\Pack;
 
-use Subapp\Collection\Collection;
 use Subapp\Pack\Common\Setup\SetupInterface;
+use Subapp\Pack\Compactor\Collection\Collection;
 use Subapp\Pack\Decorator\ProcessHandlerFactory;
 use Subapp\Pack\Decorator\ProcessHandlerInterface;
 

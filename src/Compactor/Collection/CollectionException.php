@@ -1,10 +1,10 @@
 <?php
 
-namespace Subapp\Collection;
+namespace Subapp\Pack\Compactor\Collection;
 
 /**
  * Class CollectionException
- * @package Subapp\Collection
+ * @package Subapp\Pack\Compactor\Collection
  */
 class CollectionException extends \Exception
 {

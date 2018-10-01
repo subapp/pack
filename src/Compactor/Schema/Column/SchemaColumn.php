@@ -20,19 +20,39 @@ class SchemaColumn extends AbstractColumnLength implements SchemaKeeperInterface
     /**
      * @var string
      */
-    private $keySeparator;
+    private $separator;
+
+    /**
+     * @var boolean
+     */
+    private $isInitialized = false;
 
     /**
      * @inheritDoc
      */
-    public function __construct($name, $column, SchemaInterface $schema, $keySeparator, $position)
+    public function __construct($name, $column, SchemaInterface $schema, $separator, $position)
     {
         parent::__construct($name, $column, $schema->getByteSize(), $position);
 
         $this->schema = $schema;
-        $this->keySeparator = $keySeparator;
+        $this->separator = $separator;
     }
-    
+
+    /**
+     * @return void
+     */
+    private function initialize()
+    {
+        if (!$this->isInitialized) {
+            foreach ($this->schema->getColumns() as $column) {
+                $column->setName(sprintf('%s%s%s', $this->getName(), $this->getSeparator(), $column->getName()));
+                if ($column instanceof static) {
+                    $column->initialize();
+                }
+            } $this->isInitialized = true;
+        }
+    }
+
     /**
      * @inheritDoc
      */
@@ -46,29 +66,25 @@ class SchemaColumn extends AbstractColumnLength implements SchemaKeeperInterface
      */
     public function getSchema()
     {
-        $schema = clone($this->schema);
+        $this->initialize();
 
-        foreach ($schema->getColumns() as $inner) {
-            $inner->setName(sprintf('%s%s%s', $this->getName(), $this->getKeySeparator(), $inner->getName()));
-        }
-
-        return $schema;
+        return $this->schema;
     }
 
     /**
      * @return string
      */
-    public function getKeySeparator()
+    public function getSeparator()
     {
-        return $this->keySeparator;
+        return $this->separator;
     }
 
     /**
-     * @param string $keySeparator
+     * @param string $separator
      */
-    public function setKeySeparator($keySeparator)
+    public function setSeparator($separator)
     {
-        $this->keySeparator = $keySeparator;
+        $this->separator = $separator;
     }
     
 }

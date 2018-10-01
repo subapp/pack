@@ -1,15 +1,15 @@
 <?php
 
-namespace Subapp\Collection\Parameters;
+namespace Subapp\Pack\Compactor\Collection\Parameters;
 
-use Subapp\Collection\Collection;
-use Subapp\Collection\Parameters\Parser\IniParser;
-use Subapp\Collection\Parameters\Parser\JsonParser;
-use Subapp\Collection\Parameters\Parser\YamlParser;
+use Subapp\Pack\Compactor\Collection\Collection;
+use Subapp\Pack\Compactor\Collection\Parameters\Parser\IniParser;
+use Subapp\Pack\Compactor\Collection\Parameters\Parser\JsonParser;
+use Subapp\Pack\Compactor\Collection\Parameters\Parser\YamlParser;
 
 /**
  * Class ParametersCollection
- * @package Subapp\Collection\Parameters
+ * @package Subapp\Pack\Compactor\Collection\Parameters
  */
 class ParametersCollection extends Collection implements ParametersInterface
 {

@@ -75,4 +75,18 @@ class ObjectAccessor extends AbstractAccessor
         return $property;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getKeys()
+    {
+        $keys = [];
+
+        foreach ($this->reflection->getProperties() as $property) {
+            $keys[] = $property->getName();
+        }
+
+        return $keys;
+    }
+
 }

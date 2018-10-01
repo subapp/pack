@@ -152,13 +152,22 @@ abstract class Type
      */
     public static function retrieveTypeObject($type)
     {
-        if (!array_key_exists($type, static::$typesMap)) {
+        if (!static::hasTypeClass($type)) {
             throw new \UnexpectedValueException(sprintf('Unable create column type object with name "%s" because cannot find it', $type));
         }
         
         $class = static::$typesMap[$type];
         
         return new $class($type);
+    }
+
+    /**
+     * @param $type
+     * @return boolean
+     */
+    public static function hasTypeClass($type)
+    {
+        return array_key_exists($type, static::$typesMap);
     }
     
     /**

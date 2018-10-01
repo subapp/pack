@@ -43,7 +43,7 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
      */
     public function collapseValue(ColumnInterface $column, AccessorInterface $accessor)
     {
-        $value = $this->retrieveValue($column->getColumnName(), $accessor);
+        $value = $this->getValue($column->getColumnName(), $accessor);
 
         return $this->toPlatformValue($value, $column);
     }
@@ -55,7 +55,7 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
      */
     public function expandValue(ColumnInterface $column, AccessorInterface $accessor)
     {
-        $value = $this->retrieveValue($column->getName(), $accessor);
+        $value = $this->getValue($column->getName(), $accessor);
         
         return $this->toPhpValue($value, $column);
     }
@@ -66,13 +66,28 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
      * @return int|string|array
      * @throws \UnexpectedValueException
      */
-    protected function retrieveValue($key, AccessorInterface $accessor)
+    protected function getValue($key, AccessorInterface $accessor)
     {
         if (false === $accessor->hasValue($key)) {
             throw new \UnexpectedValueException(sprintf('Value for key (%s) does not exist in input accessor', $key));
         }
         
         return $accessor->getValue($key);
+    }
+
+    /**
+     * @param                   $key
+     * @param $value
+     * @param AccessorInterface $accessor
+     * @return int|string|array
+     */
+    protected function setValue($key, $value, AccessorInterface $accessor)
+    {
+        if (false === $accessor->hasValue($key)) {
+            throw new \UnexpectedValueException(sprintf('Value for key (%s) does not exist in output accessor', $key));
+        }
+
+        return $accessor->setValue($key, $value);
     }
     
     /**
@@ -98,20 +113,19 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
     /**
      * @param array $keys
      * @param array $values
-     * @return ArrayAccessor
+     * @return AccessorInterface
      * @throws \UnexpectedValueException
      */
     protected function composeArrayAccessor(array $keys, array $values)
     {
-        $countValues = count($values);
-        $countKeys = count($keys);
-    
-        if ($countValues !== $countKeys) {
+        $hydrator = $this->getHydrator();
+
+        if (($countValues = count($values)) !== ($countKeys = count($keys))) {
             throw new \UnexpectedValueException(sprintf('Unexpected count of pairs for keys (%d) and values (%s). Expected: (%s)',
                 $countKeys, $countValues, implode(', ', $keys)));
         }
         
-        return new ArrayAccessor(array_combine($keys, $values));
+        return current($hydrator->toAccessor(array_combine($keys, $values)));
     }
     
 }

@@ -42,5 +42,13 @@ class ArrayAccessor extends AbstractAccessor
     {
         return count($this->source);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getKeys()
+    {
+        return array_keys($this->source);
+    }
     
 }

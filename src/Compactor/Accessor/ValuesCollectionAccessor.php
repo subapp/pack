@@ -44,5 +44,13 @@ class ValuesCollectionAccessor extends AbstractAccessor
     {
         return $this->source->count();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
+    public function getKeys()
+    {
+        return array_keys($this->source->toArray());
+    }
+
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Subapp\Collection;
+namespace Subapp\Pack\Compactor\Collection;
 
 /**
  * Interface ProxyInterface
- * @package Subapp\Collection
+ * @package Subapp\Pack\Compactor\Collection
  */
 interface ProxyInterface
 {

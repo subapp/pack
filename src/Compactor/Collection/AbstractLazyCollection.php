@@ -1,10 +1,10 @@
 <?php
 
-namespace Subapp\Collection;
+namespace Subapp\Pack\Compactor\Collection;
 
 /**
  * Class AbstractLazyCollection
- * @package Subapp\Collection
+ * @package Subapp\Pack\Compactor\Collection
  */
 abstract class AbstractLazyCollection implements CollectionInterface, ProxyInterface
 {

@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Hydrator;
 
+use Subapp\Pack\Compactor\Accessor\AccessorInterface;
 use Subapp\Pack\Compactor\Factory\AccessorFactory;
 use Subapp\Pack\Compactor\Factory\ValueCompactorFactory;
 use Subapp\Pack\Compactor\Schema\SchemaInterface;
@@ -38,5 +39,11 @@ interface HydratorInterface
      * @return AccessorFactory
      */
     public function getAccessorFactory();
+
+    /**
+     * @param mixed ...$values
+     * @return array|AccessorInterface[]
+     */
+    public function toAccessor(...$values);
 
 }

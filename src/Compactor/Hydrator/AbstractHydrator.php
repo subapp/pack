@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Hydrator;
 
+use Subapp\Pack\Compactor\Accessor\AccessorInterface;
 use Subapp\Pack\Compactor\Factory\AccessorFactory;
 use Subapp\Pack\Compactor\Factory\ValueCompactorFactory;
 
@@ -45,6 +46,21 @@ abstract class AbstractHydrator implements HydratorInterface
     public function getAccessorFactory()
     {
         return $this->accessorFactory;
+    }
+
+    /**
+     * @param mixed ...$values
+     * @return array|AccessorInterface[]
+     */
+    public function toAccessor(...$values)
+    {
+        $factory   = $this->getAccessorFactory();
+
+        $accessors = array_map(function ($value) use ($factory) {
+            return ($value instanceof AccessorInterface) ? $value : $factory->getAccessor($value);
+        }, $values);
+
+        return $accessors;
     }
     
 }

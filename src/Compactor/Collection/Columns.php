@@ -2,7 +2,6 @@
 
 namespace Subapp\Pack\Compactor\Collection;
 
-use Subapp\Collection\Collection;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnsKeeperInterface;
 

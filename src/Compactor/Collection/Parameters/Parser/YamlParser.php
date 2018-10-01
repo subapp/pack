@@ -1,13 +1,13 @@
 <?php
 
-namespace Subapp\Collection\Parameters\Parser;
+namespace Subapp\Pack\Compactor\Collection\Parameters\Parser;
 
-use Subapp\Collection\Parameters\ParserInterface;
+use Subapp\Pack\Compactor\Collection\Parameters\ParserInterface;
 use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class YamlParser
- * @package Subapp\Collection\Parameters\Parser
+ * @package Subapp\Pack\Compactor\Collection\Parameters\Parser
  */
 class YamlParser implements ParserInterface
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Subapp\Collection\Parameters\Parser;
+namespace Subapp\Pack\Compactor\Collection\Parameters\Parser;
 
-use Subapp\Collection\Parameters\ParserInterface;
+use Subapp\Pack\Compactor\Collection\Parameters\ParserInterface;
 
 /**
  * Class IniParser
- * @package Subapp\Collection\Parameters\Parser
+ * @package Subapp\Pack\Compactor\Collection\Parameters\Parser
  */
 class IniParser implements ParserInterface
 {
@@ -14,51 +14,80 @@ class IniParser implements ParserInterface
     /**
      * @inheritDoc
      */
-    public static function parse($contentString)
+    public static function parse($contentString, $separator = '.')
     {
         $parameters = parse_ini_string($contentString, INI_SCANNER_NORMAL);
-        $parametersArray = [];
+
+        return static::toArray($parameters, $separator);
+    }
+
+    /**
+     * @param iterable $parameters
+     * @param string $separator
+     * @return array
+     */
+    public static function toArray(iterable $parameters, $separator = '.')
+    {
+        $array = [];
 
         foreach ($parameters as $path => $parameter) {
+            $temporary = &$array;
 
-            $temporaryArray = &$parametersArray;
-
-            foreach (explode('.', $path) as $key) {
-                $temporaryArray = &$temporaryArray[$key];
+            foreach (explode($separator, $path) as $key) {
+                $temporary = &$temporary[$key];
             }
 
-            $temporaryArray = $parameter;
+            $temporary = $parameter;
         }
 
-        return $parametersArray;
+        unset($temporary);
+
+        return $array;
     }
 
     /**
      * @inheritDoc
      */
-    public static function dump(array $parameters)
+    public static function dump(array $parameters, $separator = '.')
     {
-        $lines = [sprintf('# Dumper: %s DateTime: %s', __CLASS__, (new \DateTime())->format(\DateTime::W3C))];
+        $lines = [sprintf('# Dumper Class: %s DateTime: %s', __CLASS__, (new \DateTime())->format(\DateTime::W3C))];
 
-        static::dumpIniContent($parameters, [], $lines);
+        static::dumpToLines($parameters, $separator, [], $lines);
+
+        $lines = array_map(function ($key, $value) {
+            return sprintf('%s="%s"', $key, addslashes($value));
+        }, array_keys($lines), array_values($lines));
 
         return implode(PHP_EOL, $lines);
     }
 
     /**
      * @param array $parameters
+     * @param string $separator
+     * @return array
+     */
+    public static function toLines(array $parameters, $separator = '.')
+    {
+        static::dumpToLines($parameters, $separator, [], $lines);
+
+        return $lines;
+    }
+
+    /**
+     * @param array $parameters
+     * @param string $separator
      * @param array $indexes
      * @param array $lines
      */
-    private static function dumpIniContent(array $parameters = [], $indexes = [], &$lines = [])
+    private static function dumpToLines(array $parameters = [], $separator = '.', $indexes = [], &$lines = [])
     {
         foreach ($parameters as $index => $value) {
             $indexes[] = $index;
 
             if (is_array($value)) {
-                static::dumpIniContent($value, $indexes, $lines);
+                static::dumpToLines($value, $separator, $indexes, $lines);
             } else {
-                $lines[] = implode('.', $indexes) . '="' . addcslashes($value, '"') . '"';
+                $lines[implode($separator, $indexes)] = $value;
             }
 
             array_pop($indexes);

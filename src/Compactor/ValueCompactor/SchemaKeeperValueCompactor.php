@@ -18,10 +18,11 @@ class SchemaKeeperValueCompactor extends AbstractValueCompactor
      */
     public function collapse(ColumnInterface $column, AccessorInterface $input, AccessorInterface $output)
     {
+        $hydrator = $this->getHydrator();
+
         /** @var SchemaColumn $column */
-        $inner = $this->retrieveValue($column->getColumnName(), $input);
-        
-        $this->hydrator->extract($column->getSchema(), $inner, $output);
+        $values = $this->getValue($column->getColumnName(), $input);
+        $hydrator->extract($column->getSchema(), $values, $output);
     }
     
     /**
@@ -29,12 +30,11 @@ class SchemaKeeperValueCompactor extends AbstractValueCompactor
      */
     public function expand(ColumnInterface $column, AccessorInterface $input, AccessorInterface $output)
     {
-        /** @var SchemaColumn $column */
-        $inner = $this->retrieveValue($column->getName(), $input);
+        $hydrator = $this->getHydrator();
 
-        $this->hydrator->hydrate($column->getSchema(), $inner, $output);
-        var_dump($inner);
-//        $inner = $this->retrieveValue($column->getColumnName(), $input);
+        /** @var SchemaColumn $column */
+        $values = $hydrator->hydrate($column->getSchema(), $input, []);
+        $this->setValue($column->getColumnName(), $values, $output);
     }
     
 }

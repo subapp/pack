@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\Collection\Parameters;
+namespace Subapp\Pack\Compactor\Collection\Parameters;
 
 /**
  * Interface ParserInterface

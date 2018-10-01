@@ -2,8 +2,6 @@
 
 namespace Subapp\Pack\Compactor\Collection;
 
-use Subapp\Collection\Collection;
-
 /**
  * Class Values
  * @package Subapp\Pack\Compactor\Collection

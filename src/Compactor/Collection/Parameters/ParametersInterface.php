@@ -1,8 +1,8 @@
 <?php
 
-namespace Subapp\Collection\Parameters;
+namespace Subapp\Pack\Compactor\Collection\Parameters;
 
-use Subapp\Collection\CollectionInterface;
+use Subapp\Pack\Compactor\Collection\CollectionInterface;
 
 /**
  * Interface ParametersInterface
