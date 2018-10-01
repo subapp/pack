@@ -21,7 +21,7 @@ class SchemaKeeperValueCompactor extends AbstractValueCompactor
         /** @var SchemaColumn $column */
         $inner = $this->retrieveValue($column->getColumnName(), $input);
         
-        $this->hydrator->extract($column->getSchema(), $inner, $output->getSource());
+        $this->hydrator->extract($column->getSchema(), $inner, $output);
     }
     
     /**
@@ -29,7 +29,12 @@ class SchemaKeeperValueCompactor extends AbstractValueCompactor
      */
     public function expand(ColumnInterface $column, AccessorInterface $input, AccessorInterface $output)
     {
-    
+        /** @var SchemaColumn $column */
+        $inner = $this->retrieveValue($column->getName(), $input);
+
+        $this->hydrator->hydrate($column->getSchema(), $inner, $output);
+        var_dump($inner);
+//        $inner = $this->retrieveValue($column->getColumnName(), $input);
     }
     
 }

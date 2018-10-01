@@ -17,8 +17,7 @@
     "ext-mbstring": "*",
     "ext-msgpack": "*",
     "ext-bz2": "*",
-    "ext-zlib": "*",
-    "subapp/collection": "~1.0"
+    "ext-zlib": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^7"
