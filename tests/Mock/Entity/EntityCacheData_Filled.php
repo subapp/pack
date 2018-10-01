@@ -20,7 +20,7 @@ class EntityCacheData_Filled extends EntityCacheData
         $this->updated = new \DateTime('now - 127 days');
         $this->float1 = 0.0001;
         $this->float2 = 1234.123;
-        $this->double1 = 0.0000001;
+        $this->double1 = -0.0000001;
         $this->double2 = 1234.123456789;
     }
     

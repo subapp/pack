@@ -65,7 +65,23 @@ abstract class AbstractColumn implements ColumnInterface
     {
         return $this->column;
     }
-
+    
+    /**
+     * @inheritDoc
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function setColumnName($name)
+    {
+        $this->column = $name;
+    }
+    
     /**
      * @inheritDoc
      */

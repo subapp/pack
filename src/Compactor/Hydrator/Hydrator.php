@@ -5,49 +5,36 @@ namespace Subapp\Pack\Compactor\Hydrator;
 use Subapp\Pack\Compactor\Collection\Values;
 use Subapp\Pack\Compactor\Collection\ValuesInterface;
 use Subapp\Pack\Compactor\Accessor\AccessorInterface;
+use Subapp\Pack\Compactor\Factory\AccessorFactory;
 use Subapp\Pack\Compactor\Factory\ValueCompactorFactory;
+use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
+use Subapp\Pack\Compactor\Schema\Column\ColumnsKeeperInterface;
 use Subapp\Pack\Compactor\Schema\SchemaInterface;
+use Subapp\Pack\Compactor\Schema\SchemaKeeperInterface;
 
 /**
  * Class Hydrator
  * @package Subapp\Pack\Compactor\Hydrator
  */
-class Hydrator implements HydratorInterface
+class Hydrator extends AbstractHydrator
 {
     
     /**
-     * @var SchemaInterface
-     */
-    private $schema;
-    
-    /**
-     * @var ValueCompactorFactory
-     */
-    private $factory;
-    
-    /**
-     * DataHydrator constructor.
      * @param SchemaInterface $schema
-     */
-    public function __construct(SchemaInterface $schema)
-    {
-        $this->schema = $schema;
-        $this->factory = new ValueCompactorFactory($this);
-    }
-    
-    
-    /**
-     * @param AccessorInterface $input
-     * @param AccessorInterface $output
+     * @param                 $input
+     * @param                 $output
      *
-     * @return array|object
+     * @return array|mixed|object
      */
-    public function hydrate(AccessorInterface $input, AccessorInterface $output)
+    public function hydrate(SchemaInterface $schema, $input, $output)
     {
-        $factory = $this->getFactory();
-        $columns = $this->getSchema()->getColumns();
+        $factory    = $this->getValueCompactorFactory();
+        $accessor   = $this->getAccessorFactory();
+        // wrap data into accessor
+        $output     = $accessor->getAccessor($output);
+        $input      = $accessor->getAccessor($input);
         
-        foreach ($columns as $column) {
+        foreach ($schema->getColumns() as $column) {
             $factory->getValueCompactor($column)->expand($column, $input, $output);
         }
         
@@ -55,37 +42,25 @@ class Hydrator implements HydratorInterface
     }
     
     /**
-     * @param AccessorInterface $input
-     * @param AccessorInterface $output
+     * @param SchemaInterface $schema
+     * @param                 $input
+     * @param                 $output
      *
      * @return array|object
      */
-    public function extract(AccessorInterface $input, AccessorInterface $output)
+    public function extract(SchemaInterface $schema, $input, $output)
     {
-        $factory = $this->getFactory();
-        $columns = $this->getSchema()->getColumns();
+        $factory    = $this->getValueCompactorFactory();
+        $accessor   = $this->getAccessorFactory();
+        // wrap data into accessor
+        $input      = $accessor->getAccessor($input);
+        $output     = $accessor->getAccessor($output);
         
-        foreach ($columns as $column) {
+        foreach ($schema->getColumns() as $column) {
             $factory->getValueCompactor($column)->collapse($column, $input, $output);
         }
         
         return $output->getSource();
-    }
-
-    /**
-     * @return ValueCompactorFactory
-     */
-    public function getFactory()
-    {
-        return $this->factory;
-    }
-    
-    /**
-     * @return SchemaInterface
-     */
-    public function getSchema()
-    {
-        return $this->schema;
     }
     
 }

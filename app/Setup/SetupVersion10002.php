@@ -23,7 +23,7 @@ class SetupVersion10002 extends AbstractSetup
     {
         $schema = $this->loadSchema(new Version(10002), 'Subapp\\TestApp\\Builder');
         $handler->addProcess(new ReduceCompactor($schema));
-        $handler->addProcess(new PackCompactor($schema));
+//        $handler->addProcess(new PackCompactor($schema));
 //        $handler->addProcess(new BzCompressor(1));
     }
 

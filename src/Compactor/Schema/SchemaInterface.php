@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Schema;
 
+use Subapp\Pack\Compactor\Collection\Columns;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 
 /**
@@ -18,7 +19,7 @@ interface SchemaInterface
     public function addColumn(ColumnInterface $value);
 
     /**
-     * @return ColumnInterface[]|\ArrayIterator
+     * @return ColumnInterface[]|Columns
      */
     public function getColumns();
 
@@ -38,5 +39,10 @@ interface SchemaInterface
      * @return Version
      */
     public function getVersion();
+    
+    /**
+     * @return int
+     */
+    public function getByteSize();
 
 }

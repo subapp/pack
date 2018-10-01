@@ -38,9 +38,9 @@ class EntityCacheData
 
     public $lot_of_symbols_in_field_name1 = 123;
     public $lot_of_symbols_in_field_name2 = 321;
-    public $lot_of_symbols_in_field_name3 = 456;
+    public $lot_of_symbols_in_field_name3 = null;
     public $lot_of_symbols_in_field_name4 = 654;
-    public $lot_of_symbols_in_field_name5 = 789;
+    public $lot_of_symbols_in_field_name5 = null;
     public $lot_of_symbols_in_field_name6 = 987;
     
     public $array1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0,];

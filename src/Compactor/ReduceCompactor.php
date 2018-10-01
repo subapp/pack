@@ -14,16 +14,16 @@ use Subapp\Pack\Compactor\Schema\SchemaInterface;
  */
 class ReduceCompactor implements CompactorInterface
 {
-
+    
+    /**
+     * @var SchemaInterface
+     */
+    private $schema;
+    
     /**
      * @var HydratorInterface
      */
     private $hydrator;
-
-    /**
-     * @var AccessorFactory
-     */
-    private $accessor;
 
     /**
      * @var string
@@ -37,9 +37,9 @@ class ReduceCompactor implements CompactorInterface
      */
     public function __construct(SchemaInterface $schema, $class = null)
     {
-        $this->hydrator = new Hydrator($schema);
+        $this->schema = $schema;
+        $this->hydrator = new Hydrator();
         $this->class = $class;
-        $this->accessor = new AccessorFactory();
     }
 
     /**
@@ -47,10 +47,9 @@ class ReduceCompactor implements CompactorInterface
      */
     public function compact($values)
     {
-        $factory = $this->getAccessorFactory();
         $collection = new Values();
 
-        $this->hydrator->extract($factory->getAccessor($values), $factory->getAccessor($collection));
+        $this->hydrator->extract($this->getSchema(), $values, $collection);
 
         return $collection;
     }
@@ -60,10 +59,9 @@ class ReduceCompactor implements CompactorInterface
      */
     public function extend($compacted)
     {
-        $factory = $this->getAccessorFactory();
         $collection = $this->createOutputObject();
 
-        $this->hydrator->hydrate($factory->getAccessor($compacted), $factory->getAccessor($collection));
+        $this->hydrator->hydrate($this->getSchema(), $compacted, $collection);
 
         return $collection;
     }
@@ -77,19 +75,19 @@ class ReduceCompactor implements CompactorInterface
     }
 
     /**
-     * @return AccessorFactory
-     */
-    public function getAccessorFactory()
-    {
-        return $this->accessor;
-    }
-
-    /**
      * @return string
      */
     public function getClass()
     {
         return $this->class;
+    }
+    
+    /**
+     * @return SchemaInterface
+     */
+    public function getSchema()
+    {
+        return $this->schema;
     }
 
     /**

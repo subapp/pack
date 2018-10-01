@@ -21,7 +21,7 @@ class SetupWithMinProcessors extends AbstractSetupVersion10001
     {
         $schema = $this->getSchema();
         $handler->addProcess(new ReduceCompactor($schema, EntityCacheData::class));
-        $handler->addProcess(new JsonSerializer());
+//        $handler->addProcess(new JsonSerializer());
     }
 
 }

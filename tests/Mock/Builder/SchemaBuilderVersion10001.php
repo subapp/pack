@@ -77,6 +77,8 @@ class SchemaBuilderVersion10001 extends AbstractSchemaBuilder
     protected function complementSchema(SchemaInterface $schema)
     {
         $schema->getColumn('i3')->nullIf(2);
+        $schema->getColumn('l3')->nullIf(-1);
+        $schema->getColumn('l5')->nullIf(-1);
     }
     
 }

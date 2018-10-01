@@ -2,6 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Schema\Column;
 
+use Subapp\Pack\Compactor\Collection\Columns;
 use Subapp\Pack\Compactor\Schema\Type\ArrayListType;
 use Subapp\Pack\Compactor\Schema\Type\Type;
 
@@ -13,7 +14,7 @@ class ValueListColumn extends AbstractColumnLength implements ColumnsKeeperInter
 {
     
     /**
-     * @var array|ColumnInterface[]
+     * @var Columns|ColumnInterface[]
      */
     private $columns = [];
     
@@ -30,7 +31,7 @@ class ValueListColumn extends AbstractColumnLength implements ColumnsKeeperInter
         parent::__construct($name, null, $length, $position);
         
         $this->separator = $separator;
-        $this->columns = $columns;
+        $this->columns = new Columns($columns);
     }
     
     /**
@@ -38,11 +39,7 @@ class ValueListColumn extends AbstractColumnLength implements ColumnsKeeperInter
      */
     public function getColumns()
     {
-        uasort($this->columns, function (ColumnInterface $columnA, ColumnInterface $columnB) {
-            return $columnA->getPosition() - $columnB->getPosition();
-        });
-        
-        return $this->columns;
+        return $this->columns->getColumns();
     }
     
     /**

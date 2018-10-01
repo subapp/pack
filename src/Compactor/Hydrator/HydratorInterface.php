@@ -2,7 +2,9 @@
 
 namespace Subapp\Pack\Compactor\Hydrator;
 
-use Subapp\Pack\Compactor\Accessor\AccessorInterface;
+use Subapp\Pack\Compactor\Factory\AccessorFactory;
+use Subapp\Pack\Compactor\Factory\ValueCompactorFactory;
+use Subapp\Pack\Compactor\Schema\SchemaInterface;
 
 /**
  * Interface NormalizerInterface
@@ -12,17 +14,29 @@ interface HydratorInterface
 {
     
     /**
-     * @param AccessorInterface $input
-     * @param AccessorInterface $output
+     * @param SchemaInterface   $schema
+     * @param $input
+     * @param $output
      * @return mixed
      */
-    public function hydrate(AccessorInterface $input, AccessorInterface $output);
+    public function hydrate(SchemaInterface $schema, $input, $output);
     
     /**
-     * @param AccessorInterface $input
-     * @param AccessorInterface $output
+     * @param SchemaInterface   $schema
+     * @param $input
+     * @param $output
      * @return mixed
      */
-    public function extract(AccessorInterface $input, AccessorInterface $output);
+    public function extract(SchemaInterface $schema, $input, $output);
+    
+    /**
+     * @return ValueCompactorFactory
+     */
+    public function getValueCompactorFactory();
+    
+    /**
+     * @return AccessorFactory
+     */
+    public function getAccessorFactory();
 
 }

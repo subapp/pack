@@ -22,6 +22,16 @@ interface ColumnInterface
     public function getColumnName();
     
     /**
+     * @param string $name
+     */
+    public function setName($name);
+    
+    /**
+     * @param string $name
+     */
+    public function setColumnName($name);
+    
+    /**
      * @return string
      */
     public function getTypeName();

@@ -3,6 +3,7 @@
 namespace Subapp\Pack\Compactor\ValueCompactor;
 
 use Subapp\Pack\Compactor\Accessor\AccessorInterface;
+use Subapp\Pack\Compactor\Accessor\ArrayAccessor;
 use Subapp\Pack\Compactor\Hydrator\HydratorInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 
@@ -62,7 +63,7 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
     /**
      * @param                   $key
      * @param AccessorInterface $accessor
-     * @return int|string
+     * @return int|string|array
      * @throws \UnexpectedValueException
      */
     protected function retrieveValue($key, AccessorInterface $accessor)
@@ -92,6 +93,25 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
     protected function toPhpValue($value, ColumnInterface $column)
     {
         return $column->getType()->toPhpValue($value);
+    }
+    
+    /**
+     * @param array $keys
+     * @param array $values
+     * @return ArrayAccessor
+     * @throws \UnexpectedValueException
+     */
+    protected function composeArrayAccessor(array $keys, array $values)
+    {
+        $countValues = count($values);
+        $countKeys = count($keys);
+    
+        if ($countValues !== $countKeys) {
+            throw new \UnexpectedValueException(sprintf('Unexpected count of pairs for keys (%d) and values (%s). Expected: (%s)',
+                $countKeys, $countValues, implode(', ', $keys)));
+        }
+        
+        return new ArrayAccessor(array_combine($keys, $values));
     }
     
 }

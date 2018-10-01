@@ -2,8 +2,7 @@
 
 namespace Subapp\Pack\Compactor\Schema;
 
-use Subapp\Collection\Collection;
-use Subapp\Collection\CollectionInterface;
+use Subapp\Pack\Compactor\Collection\Columns;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 
 /**
@@ -19,9 +18,9 @@ class Schema implements SchemaInterface
     private $version;
 
     /**
-     * @var CollectionInterface
+     * @var Columns
      */
-    private $collection = [];
+    private $columns = [];
 
     /**
      * Schema constructor.
@@ -29,7 +28,7 @@ class Schema implements SchemaInterface
      */
     public function __construct(Version $version)
     {
-        $this->collection = new Collection([], ColumnInterface::class);
+        $this->columns = new Columns();
         $this->version = $version;
     }
 
@@ -38,7 +37,7 @@ class Schema implements SchemaInterface
      */
     public function addColumn(ColumnInterface $value)
     {
-        $this->collection->offsetSet($value->getName(), $value);
+        $this->columns->offsetSet($value->getName(), $value);
     }
 
     /**
@@ -46,9 +45,7 @@ class Schema implements SchemaInterface
      */
     public function getColumns()
     {
-        return $this->collection->sort(function (ColumnInterface $columnA, ColumnInterface $columnB) {
-            return $columnA->getPosition() - $columnB->getPosition();
-        });
+        return $this->columns->getColumns();
     }
 
     /**
@@ -56,7 +53,7 @@ class Schema implements SchemaInterface
      */
     public function getColumn($name)
     {
-        return $this->collection->offsetGet($name);
+        return $this->columns->offsetGet($name);
     }
 
     /**
@@ -64,7 +61,7 @@ class Schema implements SchemaInterface
      */
     public function hasColumn($name)
     {
-        return $this->collection->offsetExists($name);
+        return $this->columns->offsetExists($name);
     }
 
     /**
@@ -73,6 +70,24 @@ class Schema implements SchemaInterface
     public function getVersion()
     {
         return $this->version;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getByteSize()
+    {
+        $bytes = 0;
+    
+        foreach ($this->getColumns() as $column) {
+            if (($length = $column->getLength()) === null) {
+                $bytes = -1; break;
+            }
+    
+            $bytes += $length;
+        }
+        
+        return $bytes;
     }
 
 }

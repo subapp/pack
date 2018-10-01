@@ -38,7 +38,7 @@ class ColumnKeeperValueCompactor extends UsualValueCompactor
     public function expand(ColumnInterface $column, AccessorInterface $input, AccessorInterface $output)
     {
         if ($column instanceof ColumnsKeeperInterface) {
-            $accessor = $this->getArrayAccessor($column, $input);
+            $accessor = $this->createArrayAccessor($column, $input);
             
             foreach ($column->getColumns() as $inner) {
                 $this->expand($inner, $accessor, $output);
@@ -51,62 +51,40 @@ class ColumnKeeperValueCompactor extends UsualValueCompactor
     }
     
     /**
-     * @param ColumnInterface    $column
-     * @param AccessorInterface $input
+     * @param ColumnInterface $column
+     * @param AccessorInterface      $input
      * @return ArrayAccessor
      */
-    protected function getArrayAccessor(ColumnInterface $column, AccessorInterface $input)
+    protected function createArrayAccessor(ColumnInterface $column, AccessorInterface $input)
     {
-        $collection = [];
-        
-        if ($column instanceof ColumnsKeeperInterface) {
-            $collection = array_combine(...$this->getValuesKeysPairs($column, $input));
-        }
-        
-        return new ArrayAccessor($collection);
+        /** @var ColumnInterface $column */
+        return $this->composeArrayAccessor($this->getInnerKeys($column), $this->getInnerValues($column, $input));
     }
     
     /**
-     * @param ColumnsKeeperInterface $column
-     * @param AccessorInterface      $input
-     * @return array
-     * @throws \UnexpectedValueException
-     */
-    protected function getValuesKeysPairs(ColumnsKeeperInterface $column, AccessorInterface $input)
-    {
-        $values = $this->getInnerValues($column, $input);
-        $keys = $this->getInnerKeys($column);
-        
-        if (($countValues = count($values)) !== ($countKeys = count($keys))) {
-            throw new \UnexpectedValueException(sprintf('Unexpected count of pairs for keys (%d) and values (%s). Expected: (%s)',
-                $countKeys, $countValues, implode(', ', $keys)));
-        }
-        
-        return [$keys, $values];
-    }
-    
-    /**
-     * @param ColumnsKeeperInterface   $column
+     * @param ColumnInterface   $column
      * @param AccessorInterface $input
      * @return array
      */
-    protected function getInnerValues(ColumnsKeeperInterface $column, AccessorInterface $input)
+    protected function getInnerValues(ColumnInterface $column, AccessorInterface $input)
     {
         return $this->expandValue($column, $input);
     }
-
+    
     /**
-     * @param ColumnsKeeperInterface $column
+     * @param ColumnInterface $column
      * @return array
      */
-    protected function getInnerKeys(ColumnsKeeperInterface $column)
+    protected function getInnerKeys(ColumnInterface $column)
     {
         $keys = [];
 
-        foreach ($column->getColumns() as $inner) {
-            $keys[] = $inner->getName();
+        if ($column instanceof ColumnsKeeperInterface) {
+            foreach ($column->getColumns() as $inner) {
+                $keys[] = $inner->getName();
+            }
         }
-
+        
         return $keys;
     }
     
