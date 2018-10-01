@@ -29,10 +29,9 @@ class Hydrator extends AbstractHydrator
     public function hydrate(SchemaInterface $schema, $input, $output)
     {
         $factory    = $this->getValueCompactorFactory();
-        $accessor   = $this->getAccessorFactory();
+
         // wrap data into accessor
-        $output     = $accessor->getAccessor($output);
-        $input      = $accessor->getAccessor($input);
+        list($input, $output) = $this->toAccessor($input, $output);
         
         foreach ($schema->getColumns() as $column) {
             $factory->getValueCompactor($column)->expand($column, $input, $output);
@@ -51,16 +50,30 @@ class Hydrator extends AbstractHydrator
     public function extract(SchemaInterface $schema, $input, $output)
     {
         $factory    = $this->getValueCompactorFactory();
-        $accessor   = $this->getAccessorFactory();
+
         // wrap data into accessor
-        $input      = $accessor->getAccessor($input);
-        $output     = $accessor->getAccessor($output);
+        list($input, $output) = $this->toAccessor($input, $output);
         
         foreach ($schema->getColumns() as $column) {
             $factory->getValueCompactor($column)->collapse($column, $input, $output);
         }
         
         return $output->getSource();
+    }
+
+    /**
+     * @param mixed ...$values
+     * @return array|AccessorInterface[]
+     */
+    public function toAccessor(...$values)
+    {
+        $factory   = $this->getAccessorFactory();
+
+        $accessors = array_map(function ($value) use ($factory) {
+            return ($value instanceof AccessorInterface) ? $value : $factory->getAccessor($value);
+        }, $values);
+
+        return $accessors;
     }
     
 }

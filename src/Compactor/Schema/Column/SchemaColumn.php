@@ -16,19 +16,21 @@ class SchemaColumn extends AbstractColumnLength implements SchemaKeeperInterface
      * @var SchemaInterface
      */
     private $schema;
-    
+
+    /**
+     * @var string
+     */
+    private $keySeparator;
+
     /**
      * @inheritDoc
      */
-    public function __construct($name, $column, SchemaInterface $schema, $position)
+    public function __construct($name, $column, SchemaInterface $schema, $keySeparator, $position)
     {
         parent::__construct($name, $column, $schema->getByteSize(), $position);
-        
-        foreach ($schema->getColumns() as $inner) {
-            $inner->setName(sprintf('%s_%s', $name, $inner->getName()));
-        }
-    
+
         $this->schema = $schema;
+        $this->keySeparator = $keySeparator;
     }
     
     /**
@@ -44,7 +46,29 @@ class SchemaColumn extends AbstractColumnLength implements SchemaKeeperInterface
      */
     public function getSchema()
     {
-        return $this->schema;
+        $schema = clone($this->schema);
+
+        foreach ($schema->getColumns() as $inner) {
+            $inner->setName(sprintf('%s%s%s', $this->getName(), $this->getKeySeparator(), $inner->getName()));
+        }
+
+        return $schema;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeySeparator()
+    {
+        return $this->keySeparator;
+    }
+
+    /**
+     * @param string $keySeparator
+     */
+    public function setKeySeparator($keySeparator)
+    {
+        $this->keySeparator = $keySeparator;
     }
     
 }
