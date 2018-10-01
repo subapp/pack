@@ -24,10 +24,9 @@ class PackerBuilder implements PackerBuilderInterface
      */
     public function getPacker(SchemaInterface $schema, TypeMappingInterface $mapping = null)
     {
-        $mapping = ($mapping ?? new TypeMapping());
-        $builder = new PackFormatBuilder($schema, $mapping);
+        $builder = new PackFormatBuilder($mapping ?? new TypeMapping());
 
-        return new Packer(new PhpPack(), $builder);
+        return new Packer($schema, new PhpPack(), $builder);
     }
     
 }

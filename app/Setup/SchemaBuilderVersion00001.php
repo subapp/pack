@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\TestApp\Setup;
+namespace Subapp\Pack\App\Setup;
 
 use Subapp\Pack\Compactor\Builder\AbstractSchemaBuilder;
 use Subapp\Pack\Compactor\Schema\Column\IntegerColumn;
@@ -9,7 +9,7 @@ use Subapp\Pack\Compactor\Schema\SchemaInterface;
 
 /**
  * Class SchemaBuilderVersion00001
- * @package Subapp\TestApp\Setup
+ * @package Subapp\Pack\App\Setup
  */
 class SchemaBuilderVersion00001 extends AbstractSchemaBuilder
 {

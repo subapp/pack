@@ -25,7 +25,7 @@
   "autoload": {
     "psr-4": {
       "Subapp\\Pack\\": "src/",
-      "Subapp\\TestApp\\": "app/"
+      "Subapp\\Pack\\App\\": "app/"
     }
   },
   "autoload-dev": {

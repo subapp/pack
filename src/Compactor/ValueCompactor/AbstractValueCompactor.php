@@ -83,10 +83,6 @@ abstract class AbstractValueCompactor implements ValueCompactorInterface
      */
     protected function setValue($key, $value, AccessorInterface $accessor)
     {
-        if (false === $accessor->hasValue($key)) {
-            throw new \UnexpectedValueException(sprintf('Value for key (%s) does not exist in output accessor', $key));
-        }
-
         return $accessor->setValue($key, $value);
     }
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\TestApp\Builder;
+namespace Subapp\Pack\App\Builder;
 
 use Subapp\Pack\Compactor\Builder\AbstractSchemaBuilder;
 use Subapp\Pack\Compactor\Schema\Column\BitMaskColumn;
@@ -14,7 +14,7 @@ use Subapp\Pack\Compactor\Schema\SchemaInterface;
 
 /**
  * Class SchemaBuilderVersion10001
- * @package Subapp\TestApp\Builder
+ * @package Subapp\Pack\App\Builder
  */
 class SchemaBuilderVersion10001 extends AbstractSchemaBuilder
 {

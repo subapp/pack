@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\TestApp\Setup;
+namespace Subapp\Pack\App\Setup;
 
 use Subapp\Pack\Common\Setup\AbstractSetup;
 use Subapp\Pack\Compactor\Schema\Version;
@@ -9,7 +9,7 @@ use Subapp\Pack\Serializer\PhpSerializer;
 
 /**
  * Class VersionSetup
- * @package Subapp\TestApp\Setup
+ * @package Subapp\Pack\App\Setup
  */
 class VersionSetup extends AbstractSetup
 {

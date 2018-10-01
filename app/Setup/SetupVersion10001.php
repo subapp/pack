@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\TestApp\Setup;
+namespace Subapp\Pack\App\Setup;
 
 use Subapp\Pack\Common\Setup\AbstractSetup;
 use Subapp\Pack\Compactor\PackCompactor;
@@ -11,7 +11,7 @@ use Subapp\Pack\Serializer\Base64Serializer;
 
 /**
  * Class Setup1
- * @package Subapp\TestApp\Setup
+ * @package Subapp\Pack\App\Setup
  */
 class SetupVersion10001 extends AbstractSetup
 {

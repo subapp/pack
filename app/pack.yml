@@ -4,4 +4,4 @@ subapp:
   schema:
     version: 10001
     builder:
-      namespace: Subapp\TestApp\Builder
+      namespace: Subapp\Pack\App\Builder

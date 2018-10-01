@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\TestApp\Setup;
+namespace Subapp\Pack\App\Setup;
 
 use Subapp\Pack\Common\Setup\AbstractSetup;
 use Subapp\Pack\Compactor\PackCompactor;
@@ -11,7 +11,7 @@ use Subapp\Pack\ProcessHandlerCollection;
 
 /**
  * Class Setup1
- * @package Subapp\TestApp\Setup
+ * @package Subapp\Pack\App\Setup
  */
 class SetupVersion10002 extends AbstractSetup
 {
@@ -21,7 +21,7 @@ class SetupVersion10002 extends AbstractSetup
      */
     public function setup(ProcessHandlerCollection $handler)
     {
-        $schema = $this->loadSchema(new Version(10002), 'Subapp\\TestApp\\Builder');
+        $schema = $this->loadSchema(new Version(10002), 'Subapp\Pack\App\Builder');
         $handler->addProcess(new ReduceCompactor($schema));
         $handler->addProcess(new PackCompactor($schema));
 //        $handler->addProcess(new BzCompressor(1));

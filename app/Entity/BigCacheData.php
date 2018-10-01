@@ -1,10 +1,10 @@
 <?php
 
-namespace Subapp\TestApp\Entity;
+namespace Subapp\Pack\App\Entity;
 
 /**
  * Class BigCacheData
- * @package Subapp\TestApp\Entity
+ * @package Subapp\Pack\App\Entity
  */
 class BigCacheData
 {

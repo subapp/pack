@@ -1,11 +1,11 @@
 <?php
 
-namespace Subapp\TestApp;
+namespace Subapp\Pack\App;
 
 use Subapp\Pack\ProcessHandlerCollection;
-use Subapp\TestApp\Entity\BigCacheDataFilled;
-use Subapp\TestApp\Setup\SetupExtraData_v1;
-use Subapp\TestApp\Setup\SetupVersion10001;
+use Subapp\Pack\App\Entity\BigCacheDataFilled;
+use Subapp\Pack\App\Setup\SetupExtraData_v1;
+use Subapp\Pack\App\Setup\SetupVersion10001;
 
 include_once __DIR__ . '/../vendor/autoload.php';
 

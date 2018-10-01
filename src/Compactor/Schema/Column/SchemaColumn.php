@@ -44,12 +44,22 @@ class SchemaColumn extends AbstractColumnLength implements SchemaKeeperInterface
     private function initialize()
     {
         if (!$this->isInitialized) {
+
             foreach ($this->schema->getColumns() as $column) {
+                $isStringType = (null !== $column->getTypeName() && $column->getType()->isString());
+
+                if ($isStringType && $column->getLength() === null) {
+                    throw new \UnexpectedValueException('Infinity length not allowed for inner columns');
+                }
+
                 $column->setName(sprintf('%s%s%s', $this->getName(), $this->getSeparator(), $column->getName()));
+
                 if ($column instanceof static) {
                     $column->initialize();
                 }
-            } $this->isInitialized = true;
+            }
+
+            $this->isInitialized = true;
         }
     }
 

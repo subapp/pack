@@ -1,6 +1,6 @@
 <?php
 
-namespace Subapp\TestApp\Setup;
+namespace Subapp\Pack\App\Setup;
 
 use Subapp\Pack\Common\Setup\AbstractSetup;
 use Subapp\Pack\Compressor\BzCompressor;
@@ -10,7 +10,7 @@ use Subapp\Pack\Serializer\MsgPackSerializer;
 
 /**
  * Class SetupExtraData_v1
- * @package Subapp\TestApp\Setup
+ * @package Subapp\Pack\App\Setup
  */
 class SetupExtraData_v1 extends AbstractSetup
 {

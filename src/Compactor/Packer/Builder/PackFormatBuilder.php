@@ -5,6 +5,7 @@ namespace Subapp\Pack\Compactor\Packer\Builder;
 use Subapp\Pack\Compactor\Packer\Mapping\TypeMappingInterface;
 use Subapp\Pack\Compactor\Schema\Column\ColumnInterface;
 use Subapp\Pack\Compactor\Schema\SchemaInterface;
+use Subapp\Pack\Compactor\Schema\SchemaKeeperInterface;
 use Subapp\Pack\Compactor\Schema\Type\Type;
 
 /**
@@ -15,51 +16,52 @@ final class PackFormatBuilder
 {
     
     /**
-     * @var SchemaInterface
-     */
-    private $schema;
-    
-    /**
      * @var TypeMappingInterface
      */
     private $mapping;
     
     /**
      * PackFormatBuilder constructor.
-     * @param SchemaInterface      $schema
      * @param TypeMappingInterface $mapping
      */
-    public function __construct(SchemaInterface $schema, TypeMappingInterface $mapping)
+    public function __construct(TypeMappingInterface $mapping)
     {
-        $this->schema = $schema;
         $this->mapping = $mapping;
     }
-    
+
     /**
+     * @param SchemaInterface $schema
      * @return string
      */
-    public function getPackFormat()
+    public function getPackFormat(SchemaInterface $schema)
     {
         $format = null;
-        $schema = $this->getSchema();
         
         foreach ($schema->getColumns() as $column) {
-            $format = sprintf('%s%s', $format, $this->getNormalizedFormat($column));
+            $pattern = ($column instanceof SchemaKeeperInterface)
+                ? $this->getPackFormat($column->getSchema())
+                : $this->getNormalizedFormat($column);
+
+            $format = sprintf('%s%s', $format, $pattern);
         }
 
         return $format;
     }
-    
+
     /**
+     * @param SchemaInterface $schema
      * @return string
      */
-    public function getUnpackFormat()
+    public function getUnpackFormat(SchemaInterface $schema)
     {
         $format = null;
-        $schema = $this->getSchema();
         
         foreach ($schema->getColumns() as $column) {
-            $format = sprintf('%s/%s%s', $format, $this->getNormalizedFormat($column), $column->getName());
+            $pattern = ($column instanceof SchemaKeeperInterface)
+                ? $this->getUnpackFormat($column->getSchema())
+                : sprintf('%s%s', $this->getNormalizedFormat($column), $column->getName());
+
+            $format = sprintf('%s/%s', $format, $pattern);
         }
 
         return trim($format, '/');
@@ -83,15 +85,7 @@ final class PackFormatBuilder
 
         return $format;
     }
-    
-    /**
-     * @return SchemaInterface
-     */
-    public function getSchema()
-    {
-        return $this->schema;
-    }
-    
+
     /**
      * @return TypeMappingInterface
      */
